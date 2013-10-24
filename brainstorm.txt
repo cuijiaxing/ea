@@ -1,0 +1,24 @@
+command-line options
+- number of traffic lights
+- population size
+- number of iterations
+- parent selection algorithm
+- recombination algorithm
+- mutation algorithm
+- survivor selection algorithm
+
+
+classes to implement
+- interface for parent selection
+- interface for mutation, and subclasses
+- interface for recombination, and subclasses
+- interface for survivor selection, and subclasses
+
+
+workflow
+- generate initial population
+- evaluate it
+
+while(num_iterations --)
+  parent_selection(population)
+  ...
