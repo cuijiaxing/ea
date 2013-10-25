@@ -1,19 +1,30 @@
 import random
 
 from models.individual import Individual
-from recombination.recombination import Recombination
+from models.population import Population
+from recombination import Recombination
 
 
 class SinglePointCrossover(Recombination):
   
   @classmethod
-  def recombine(cls, individuals):
-    if len(individuals) != 2:
-      raise Exception("Specify exactly two parents")
-    genes_0 = individuals[0].genes
-    genes_1 = individuals[1].genes
-    crossover_point = random.randint(0, len(genes_0) - 2)
-    genes_child_0 = [genes_0[i] if i <= crossover_point else genes_1[i] for i in xrange(len(genes_0))]
-    genes_child_1 = [genes_1[i] if i <= crossover_point else genes_0[i] for i in xrange(len(genes_0))]
-    return [Individual(genes_child_0), Individual(genes_child_1)]
+  def recombine(cls, population):
+    population_size = len(population.individuals)
+    fathers = Population(population.individuals[:population_size/2])
+    mothers = Population(population.individuals[population_size/2:])
+    
+    children = []
+    for father, mother in zip(fathers, mothers):
+      children += cls.single_point_crossover(father, mother)
+    
+    return Population(children)
+  
+  @classmethod
+  def single_point_crossover(cls, father, mother):
+    genes_father = father.genes
+    genes_mother = mother.genes
+    crossover_point = random.randint(0, len(genes_father) - 2)
+    genes_son = [genes_father[i] if i <= crossover_point else genes_mother[i] for i in xrange(len(genes_father))]
+    genes_daughter = [genes_father[i] if i <= crossover_point else genes_mother[i] for i in xrange(len(genes_father))]
+    return [Individual(genes_son), Individual(genes_daughter)]
     

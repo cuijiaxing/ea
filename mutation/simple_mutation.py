@@ -3,8 +3,10 @@
 """
 from random import randint, gauss
 
+from mutation import Mutation
 
-class SimpleMutation(object):
+
+class SimpleMutation(Mutation):
   
   @classmethod
   def mutate(cls, individual):

@@ -1,6 +1,6 @@
 from survivor_selection import SurvivorSelection
 
-class FitnessPoportional(SurvivorSelection):
+class FitnessProportional(SurvivorSelection):
   
   @classmethod
   def select(cls, population):

@@ -4,5 +4,5 @@
 class Recombination(object):
   
   @classmethod
-  def recombine(cls, individuals):
+  def recombine(cls, population):
     raise NotImplementedError

@@ -2,6 +2,6 @@
 class UniformCrossover(object):
   
   @classmethod
-  def recombine(cls, individuals):
+  def recombine(cls, population):
     #TODO implement this
     raise NotImplementedError
