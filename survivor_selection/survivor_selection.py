@@ -4,5 +4,5 @@
 class SurvivorSelection(object):
 
   @classmethod
-  def select(cls, population):
+  def select(cls, population, offspring):
     raise NotImplementedError

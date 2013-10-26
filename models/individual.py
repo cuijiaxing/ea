@@ -1,4 +1,4 @@
-import random
+from random import random
 
 from models.traffic_light import TrafficLight
 
