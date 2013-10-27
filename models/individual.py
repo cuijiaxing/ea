@@ -15,6 +15,6 @@ class Individual(object):
         genes = [TrafficLight() for i in xrange(individualSize)]
         return Individual(genes)
 
-    def evaluate_fitness(self):
+    def evaluateFitness(self):
         #TODO implement by Cuijiaxing
         self.fitness = random()

@@ -10,8 +10,8 @@ class SinglePointCrossover(Recombination):
     @classmethod
     def recombine(cls, population):
         population_size = len(population.individuals)
-        fathers = Population(population.individuals[:population_size / 2])
-        mothers = Population(population.individuals[population_size / 2:])
+        fathers = population.individuals[:population_size / 2]
+        mothers = population.individuals[population_size / 2:]
 
         children = []
         for father, mother in zip(fathers, mothers):

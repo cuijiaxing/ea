@@ -6,5 +6,5 @@
 class ParentSelection(object):
 
     @classmethod
-    def select(cls, population):
+    def select(cls, population, ratio):
         raise NotImplementedError

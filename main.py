@@ -6,6 +6,7 @@ from pprint import pprint
 from sys import exit
 
 from algorithms.simple_ga import SimpleGA
+from models.individual import Individual
 from models.population import Population
 
 
@@ -56,7 +57,8 @@ if __name__ == '__main__':
         _temp = __import__("{}.{}".format(option, selectedOption), globals(), locals(), [className], -1)
         locals()[underscore_to_camelcase(option)] = _temp.__getattribute__(className)
 
-    initialPopulation = Population(populationSize=populationSize, individualSize=individualSize)
+    initialIndividuals = [Individual.random(individualSize) for i in xrange(populationSize)]
+    initialPopulation = Population([Individual.random(individualSize) for i in xrange(populationSize)])
 
     # Initialize the algorithm
     algorithm = SimpleGA()
