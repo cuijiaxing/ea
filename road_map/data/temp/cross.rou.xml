@@ -2,9 +2,9 @@
         <vType id="typeWE" accel="0.8" decel="0.45" sigma="0.5" length="5"  minGap="2.5" maxSpeed="1" guiShape="passenger"/>
         <vType id="typeNS" accel="0.8" decel="0.45" sigma="0.5" length="17" minGap="3" maxSpeed="1" guiShape="bus"/>
 
-        <route id="right" edges="1 3 5 7" />
-        <route id="left" edges="1 3 5 7" />
-        <route id="down" edges="8 6 4 2" />
+        <route id="right" edges="51o 1i 2o 52i" />
+        <route id="left" edges="52o 2i 1o 51i" />
+        <route id="down" edges="54o 4i 3o 53i" />
     <vehicle id="0" type="typeWE" route="left" depart="0" />
     <vehicle id="1" type="typeWE" route="right" depart="3" />
     <vehicle id="2" type="typeWE" route="right" depart="4" />
