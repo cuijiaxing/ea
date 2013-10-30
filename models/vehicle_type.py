@@ -74,6 +74,12 @@ class VehicleType(object):
     def getARandomCarTypeList(cls, num):
         return [VehicleType(i) for i in xrange(num)]
     
+# if __name__ == "__main__":
+#     carTypeList = VehicleType.getARandomCarTypeList(10)
+#     for item in carTypeList:
+#         print item.guiShape
+
+    
     
         
         

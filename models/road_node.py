@@ -54,5 +54,6 @@ if __name__ == "__main__":
         printer.write("</nodes>")
     RoadEdge.generateEdgesAndWrite2File("../road_map/test.edg.xml", nodeList)
     SUMOCommandExecutor.generateNetworkFile("../road_map/test.nod.xml", "../road_map/test.edg.xml", "../road_map/test.net.xml")
+    SUMOCommandExecutor.generateE1Detector("../road_map/test.net.xml", 100)
     
     

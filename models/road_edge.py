@@ -27,9 +27,9 @@ class RoadEdge(object):
                     priority = random.randint(1, 100)
                     speedLimit = random.random() * 100
                     edgeList.append(RoadEdge(edgeCount, verticalNodeList[i][j].id, verticalNodeList[i][j + 1].id, priority, 1, speedLimit))
+                    edgeCount += 1
                     edgeList.append(RoadEdge(edgeCount, verticalNodeList[i][j + 1].id, verticalNodeList[i][j].id, priority, 1, speedLimit))
-                    
-                edgeCount += 2
+                    edgeCount += 1
         for i in xrange(len(verticalNodeList)):
             if i == len(verticalNodeList) - 1:
                 continue
@@ -45,9 +45,10 @@ class RoadEdge(object):
                     priority = random.randint(1, 100)
                     speedLimit = random.random() * 100
                     edgeList.append(RoadEdge(edgeCount, verticalNodeList[i][j].id, verticalNodeList[i + 1][j].id, priority, 1, speedLimit))
+                    edgeCount += 1
                     edgeList.append(RoadEdge(edgeCount, verticalNodeList[i + 1][j].id, verticalNodeList[i][j].id, priority, 1, speedLimit))
-                edgeCount += 2 
-        
+                    edgeCount += 1
+                    
         return edgeList 
     
     @classmethod
@@ -57,7 +58,18 @@ class RoadEdge(object):
             printer.write("<edges>")
             for edge in edgeList:
                     print >> printer, """<edge id="%d" from="%d" to="%d" priority="%d" numLanes="%d" speed="%f"/>""" % (edge.id, edge.startNode, edge.endNode, edge.priority, edge.numLanes, edge.speed)
-            printer.write("</edges>")            
-                    
+            printer.write("</edges>")
+            
+    @classmethod
+    def generateAdjacentMatrix(self, nodeList, edgeList):
+        #note that nodeList is a collection of column vectors
+        nodeNum = len(nodeList) * len(nodeList[0])
+        adjacentMatrix = [[0 for _ in xrange(nodeNum)] for _ in xrange(nodeNum)]
+        for i in xrange(len(edgeList)):
+            adjacentMatrix[int(edgeList[i].startNode)][int(edgeList[i].endNode)] = 1
+            adjacentMatrix[int(edgeList[i].endNode)][int(edgeList[i].startNode)] = 1
+        return adjacentMatrix
+        
+        
                     
                 
