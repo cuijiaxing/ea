@@ -1,4 +1,5 @@
-from random import random
+from road_edge import RoadEdge
+from simulator.sumo_command import SUMOCommandExecutor
 
 class RoadNode(object):
 #     def __init__(self, r_id, r_type, minX, maxX, minY, maxY):
@@ -29,8 +30,9 @@ class RoadNode(object):
         for i in xrange(hNum + 2):
             #vertical node list
             verticalNodeList = []
+            pos_x = minX + hStepLength * i
+            
             for j in xrange(vNum + 2):
-                pos_x = minX + hStepLength * i
                 pos_y = minY + vStepLength * j
                 if(pos_x == minX or pos_x == maxX or pos_y == minY or pos_y == maxY):
                     verticalNodeList.append(RoadNode(count, "priority", pos_x, pos_y))
@@ -45,9 +47,12 @@ class RoadNode(object):
 if __name__ == "__main__":
     nodeList = RoadNode.generateGridRoadNodeList(-500, 500, -500, 500, 4, 4)
     with open("../road_map/test.nod.xml", "w") as printer:
-        printer.write("<node>")
+        printer.write("<nodes>")
         for items in nodeList:
             for j in xrange(len(items)):
-                print >> printer, """<node id="%0d" x="%1f" y="%2f" type="%3s"/>""" % (items[j].id, items[j].pos_x, items[j].pos_y, items[j].type)
-#             print """<node id="%0d" x="%1f" y="%2f" type="%3s/>""" % (nodeList[i].id, nodeList[i].pos_x, nodeList[i].pos_y, nodeList[i].type)
-        printer.write("</node>")
+                print >> printer, """<node id="%d" x="%f" y="%f" type="%s"/>""" % (items[j].id, items[j].pos_x, items[j].pos_y, items[j].type)
+        printer.write("</nodes>")
+    RoadEdge.generateEdgesAndWrite2File("../road_map/test.edg.xml", nodeList)
+    SUMOCommandExecutor.generateNetworkFile("../road_map/test.nod.xml", "../road_map/test.edg.xml", "../road_map/test.net.xml")
+    
+    

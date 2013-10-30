@@ -1,4 +1,4 @@
-<node><node id="0" x="-500.000000" y="-500.000000" type="priority"/>
+<nodes><node id="0" x="-500.000000" y="-500.000000" type="priority"/>
 <node id="1" x="-500.000000" y="-300.000000" type="priority"/>
 <node id="2" x="-500.000000" y="-100.000000" type="priority"/>
 <node id="3" x="-500.000000" y="100.000000" type="priority"/>
@@ -34,4 +34,4 @@
 <node id="33" x="500.000000" y="100.000000" type="priority"/>
 <node id="34" x="500.000000" y="300.000000" type="priority"/>
 <node id="35" x="500.000000" y="500.000000" type="priority"/>
-</node>
+</nodes>

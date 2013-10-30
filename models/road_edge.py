@@ -23,19 +23,41 @@ class RoadEdge(object):
                 if j == len(verticalNodeList[i]) - 1:
                     continue
                 else:
-                    edgeList.append(RoadEdge(edgeCount, verticalNodeList[i][j].id, verticalNodeList[i][j + 1].id, random.random(1, 100), 1, random.random(1, 10) ))
-                edgeCount += 1
+                    #they can reach to each other directly
+                    priority = random.randint(1, 100)
+                    speedLimit = random.random() * 100
+                    edgeList.append(RoadEdge(edgeCount, verticalNodeList[i][j].id, verticalNodeList[i][j + 1].id, priority, 1, speedLimit))
+                    edgeList.append(RoadEdge(edgeCount, verticalNodeList[i][j + 1].id, verticalNodeList[i][j].id, priority, 1, speedLimit))
+                    
+                edgeCount += 2
+        for i in xrange(len(verticalNodeList)):
+            if i == len(verticalNodeList) - 1:
+                continue
             
             #then we generate horizontal edges
-            #skip the last colomn 
+            #skip the last column 
             if i == len(verticalNodeList) - 1:
                 continue
             for j in xrange(len(verticalNodeList[i])):
-                if j == 0 or j == len(vetticalNodeList[i]) - 1
-            
-                
-                
-                    
+                if j == 0 or j == len(verticalNodeList[i]) - 1:
+                    continue
+                else:
+                    priority = random.randint(1, 100)
+                    speedLimit = random.random() * 100
+                    edgeList.append(RoadEdge(edgeCount, verticalNodeList[i][j].id, verticalNodeList[i + 1][j].id, priority, 1, speedLimit))
+                    edgeList.append(RoadEdge(edgeCount, verticalNodeList[i + 1][j].id, verticalNodeList[i][j].id, priority, 1, speedLimit))
+                edgeCount += 2 
+        
+        return edgeList 
+    
+    @classmethod
+    def generateEdgesAndWrite2File(els, fileName, nodeList):
+        edgeList = RoadEdge.generateEdgesFromVerticalNodeList(nodeList)
+        with open(fileName, "w") as printer:
+            printer.write("<edges>")
+            for edge in edgeList:
+                    print >> printer, """<edge id="%d" from="%d" to="%d" priority="%d" numLanes="%d" speed="%f"/>""" % (edge.id, edge.startNode, edge.endNode, edge.priority, edge.numLanes, edge.speed)
+            printer.write("</edges>")            
                     
                     
                 
