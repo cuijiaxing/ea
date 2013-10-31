@@ -1,4 +1,4 @@
-from random import random
+from simulator.fitness_evaluator import FitnessEvaluator
 
 from models.traffic_light import TrafficLight
 
@@ -17,4 +17,4 @@ class Individual(object):
 
     def evaluateFitness(self):
         #TODO implement by Cuijiaxing
-        self.fitness = random()
+        self.fitness = FitnessEvaluator.getEvaluationResult(self.genes)

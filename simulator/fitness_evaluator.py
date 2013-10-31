@@ -20,13 +20,18 @@ class FitnessEvaluator:
         for i in xrange(len(fitnessListForEachDetector)):
             summation += fitnessListForEachDetector[i]
         return summation    
+    
+    @classmethod
+    def getEvaluationResult(cls, inputTraffic):
+        SUMOCommandExecutor.startANewRun(False)
+        return FitnessEvaluator.run()
+    
             
-            
-if __name__ == "__main__":
 #     sumoBinary = "sumo"
 #     sumoProcess = subprocess.Popen([sumoBinary, "-c", "../road_map/data/cross.sumocfg", "--tripinfo-output", "../road_map/tripinfo.xml"], stdout=sys.stdout, stderr=sys.stderr)
 #     sumoProcess.wait()
 #     print(FitnessEvaluator.run())
-    SUMOCommandExecutor.startANewRun()
-    print(FitnessEvaluator.run())
+    #start a new run and do not generate new newwork
+#     SUMOCommandExecutor.startANewRun(False)
+#     print(FitnessEvaluator.run())
     

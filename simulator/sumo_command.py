@@ -47,9 +47,11 @@ class SUMOCommandExecutor(object):
     
         
     @classmethod
-    def startANewRun(cls): 
-        cls.generateNodeEdgeAndRoutes()
+    def startANewRun(cls, changeNetwork): 
+        #if there is a need to change the network
+        if changeNetwork:
+            cls.generateNodeEdgeAndRoutes()
         cls.startSimulator("../road_map/test.sumocfg", "../road_map/tripinfo.xml")
        
-if __name__ == "__main__":
-    SUMOCommandExecutor.startANewRun()
+# if __name__ == "__main__":
+#     SUMOCommandExecutor.startANewRun()
