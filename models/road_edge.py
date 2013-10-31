@@ -59,15 +59,21 @@ class RoadEdge(object):
             for edge in edgeList:
                     print >> printer, """<edge id="%d" from="%d" to="%d" priority="%d" numLanes="%d" speed="%f"/>""" % (edge.id, edge.startNode, edge.endNode, edge.priority, edge.numLanes, edge.speed)
             printer.write("</edges>")
+        return edgeList
             
     @classmethod
-    def generateAdjacentMatrix(self, nodeList, edgeList):
+    def generateAdjacentMatrix(cls, nodeList, edgeList):
         #note that nodeList is a collection of column vectors
-        nodeNum = len(nodeList) * len(nodeList[0])
-        adjacentMatrix = [[0 for _ in xrange(nodeNum)] for _ in xrange(nodeNum)]
+        adjacentMatrix = [[0 for _ in xrange(len(edgeList))] for _ in xrange(len(edgeList))]
         for i in xrange(len(edgeList)):
-            adjacentMatrix[int(edgeList[i].startNode)][int(edgeList[i].endNode)] = 1
-            adjacentMatrix[int(edgeList[i].endNode)][int(edgeList[i].startNode)] = 1
+            for j in xrange(len(edgeList)):
+                if i != j:
+                    if edgeList[i].endNode == edgeList[j].startNode:
+                        adjacentMatrix[i][j]
+                    else:
+                        if edgeList[j].endNode == edgeList[i].startNode:
+                            adjacentMatrix[j][i] = 1
+            
         return adjacentMatrix
         
         

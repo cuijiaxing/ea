@@ -8,28 +8,29 @@ class VehicleType(object):
     width = 0 # the width of the vehicle
     minGap = 0 # the minimum gap of cars between cars when they park
     maxSpeed = 0 # the max speed the car can get to 
-    guiShapeArray = ["private",
-                     "public_transport",
-                     "public_emergency",
-                     "public_authority",
-                      "public_army",
-                      "vip",
-                      "ignoring",
-                      "passenger",
-                      "hov",
-                      "taxi",
-                      "bus",
-                      "delivery",
-                      "transport",
-                      "lightrail",
-                      "cityrail",
-                      "rail_slow",
-                      "rail_fast",
-                      "motorcycle",
-                      "bicycle",
-                      "pedestrian",
-                      "custom1",
-                      "custom2"];
+    guiShapeArray = [
+                    "bicycle",
+                    "motorcycle",
+                    "passenger",
+                    "passenger/sedan",
+                    "passenger/hatchback",
+                    "passenger/wagon",
+                    "passenger/van",
+                    "delivery",
+                    "transport",
+                    "transport/semitrailer",
+                    "transport/trailer",
+                    "bus",
+                    "bus/city",
+                    "bus/flexible",
+                    "bus/overland",
+                    "rail",
+                    "rail/light",
+                    "rail/city",
+                    "rail/slow",
+                    "rail/fast",
+                    "rail/cargo",
+                    "evehicle"]
                       
     guiShape = guiShapeArray[0]
     
@@ -66,7 +67,7 @@ class VehicleType(object):
         
 
         if carGUI == None or carGUI not in self.guiShapeArray:
-            self.guiShape = self.guiShapeArray[random.randint(0, len(self.guiShapeArray))]
+            self.guiShape = self.guiShapeArray[random.randint(0, len(self.guiShapeArray) - 1)]
         else:
             self.guiShape = carGUI
        
@@ -74,12 +75,9 @@ class VehicleType(object):
     def getARandomCarTypeList(cls, num):
         return [VehicleType(i) for i in xrange(num)]
     
-# if __name__ == "__main__":
-#     carTypeList = VehicleType.getARandomCarTypeList(10)
-#     for item in carTypeList:
-#         print item.guiShape
 
-    
+    def __str__(self):
+        return  """<vType id="%d" accel="%f" decel="%f" sigma="%f" length="%f" width="%f" minGap="%f" maxSpeed="%f" guiShape="%s"/>"""  % (self.id, self.accel, self.decel, self.sigma, self.length, self.width, self.minGap, self.maxSpeed, self.guiShape)
     
         
         

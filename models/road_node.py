@@ -1,4 +1,5 @@
 from road_edge import RoadEdge
+from simulator.route_generator import RouteGenerator
 from simulator.sumo_command import SUMOCommandExecutor
 
 class RoadNode(object):
@@ -47,12 +48,13 @@ class RoadNode(object):
 if __name__ == "__main__":
     nodeList = RoadNode.generateGridRoadNodeList(-500, 500, -500, 500, 4, 4)
     with open("../road_map/test.nod.xml", "w") as printer:
-        printer.write("<nodes>")
+        printer.write("<nodes>\n")
         for items in nodeList:
             for j in xrange(len(items)):
                 print >> printer, """<node id="%d" x="%f" y="%f" type="%s"/>""" % (items[j].id, items[j].pos_x, items[j].pos_y, items[j].type)
         printer.write("</nodes>")
-    RoadEdge.generateEdgesAndWrite2File("../road_map/test.edg.xml", nodeList)
+    edgeList = RoadEdge.generateEdgesAndWrite2File("../road_map/test.edg.xml", nodeList)
+    RouteGenerator.generateRouteFile(nodeList, edgeList, 1000, 10, "../road_map/test.rou.xml")
     SUMOCommandExecutor.generateNetworkFile("../road_map/test.nod.xml", "../road_map/test.edg.xml", "../road_map/test.net.xml")
     SUMOCommandExecutor.generateE1Detector("../road_map/test.net.xml", 100)
     

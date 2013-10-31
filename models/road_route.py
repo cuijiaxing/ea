@@ -12,7 +12,7 @@ class RoadRoute(object):
         numOfNodes = len(adjacentMatrix)
         routesList = []
         for i in xrange(numOfNodes):
-            routesList.append(RoadRoute(i, cls.generateARoute(adjacentMatrix, i, random.randint(numOfNodes))))
+            routesList.append(RoadRoute(i, cls.generateARoute(adjacentMatrix, i, random.randint(1, numOfNodes))))
         
         return routesList    
     
@@ -34,6 +34,15 @@ class RoadRoute(object):
                     routeNodeList.append(i)
             if foundAdjacent == False:
                 break;
-        return routeNodeList    
+        return routeNodeList   
+    
+    def __str__(self): 
+        edgeStr = ""
+        edgeNum = len(self.edgeList)
+        for i in xrange(edgeNum):
+            edgeStr += str(self.edgeList[i])
+            if i != edgeNum - 1:
+                edgeStr += " "
+        return """<route id="%d" edges="%s"/>""" % (self.routeId, edgeStr)
         
         
