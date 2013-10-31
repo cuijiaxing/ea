@@ -1,21 +1,25 @@
-import xml.etree.ElementTree as ET
-
+from lxml import etree
 
 class OutputDataRetriever(object):
+    def __init__(self, detectorId, attributeId):
+        self.summation = 0.0
+        self.detectorId = detectorId
+        self.attributeId = attributeId
     
-    #It uses too much memory, we have to change the parsing method
-    @classmethod
-    def average(cls, inputFileName, nodeId, attrName):
-        tree = ET.parse(inputFileName)
-        root = tree.getroot()
-        summation= 0.0
-        count = 0
-        for child in root:
-            if child.get('id') == nodeId:
-                summation += float(child.get(attrName))
-                count += 1
+    def start(self, tag, attrib):
+        if tag == "interval" and attrib["id"] == self.detectorId:
+            self.summation += float(attrib[self.attributeId])
+    def data(self, data):
+        pass 
         
-        if count == 0:
-            return 0
-        else:
-            return summation / count        
+    def end(self, tag):
+        pass
+        
+    def close(self):
+        return self.summation
+    
+    #calculate the flow for one single detector
+    @classmethod
+    def getFlowFromOneDetector(cls, inputFileName, detectorId, targetAttributeName):
+        parser = etree.XMLParser(target = OutputDataRetriever(detectorId, targetAttributeName))
+        return etree.parse(inputFileName, parser)

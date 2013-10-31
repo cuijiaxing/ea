@@ -16,7 +16,7 @@ class FitnessEvaluator:
         fitnessListForEachDetector = []
         summation = 0.0
         for detectorId in detectorIdList:
-            fitnessListForEachDetector.append(OutputDataRetriever.average(inputFileName, detectorId, targetAttrName))
+            fitnessListForEachDetector.append(OutputDataRetriever.getFlowFromOneDetector(inputFileName, detectorId, targetAttrName))
         for i in xrange(len(fitnessListForEachDetector)):
             summation += fitnessListForEachDetector[i]
         return summation    
