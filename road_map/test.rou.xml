@@ -1,14 +1,14 @@
 <routes>
-<vType id="0" accel="8.923738" decel="2.987911" sigma="0.149929" length="7.889269" width="9.097183" minGap="8.248868" maxSpeed="8.221274" guiShape="bus/flexible"/>
-<vType id="1" accel="6.605303" decel="6.807558" sigma="0.721283" length="6.898605" width="9.977222" minGap="3.334836" maxSpeed="4.767091" guiShape="transport"/>
-<vType id="2" accel="0.353190" decel="7.080690" sigma="0.572042" length="2.709236" width="7.538949" minGap="3.001269" maxSpeed="5.811716" guiShape="rail/city"/>
-<vType id="3" accel="9.065265" decel="6.718685" sigma="0.507315" length="8.608773" width="8.565748" minGap="8.888453" maxSpeed="2.630223" guiShape="passenger"/>
-<vType id="4" accel="1.279441" decel="2.586519" sigma="0.808344" length="7.866264" width="2.647615" minGap="7.117411" maxSpeed="4.020692" guiShape="motorcycle"/>
-<vType id="5" accel="3.552834" decel="7.442099" sigma="0.307085" length="8.092814" width="3.981854" minGap="3.345033" maxSpeed="3.646460" guiShape="rail/slow"/>
-<vType id="6" accel="4.705366" decel="8.663934" sigma="0.583575" length="9.498709" width="1.640942" minGap="9.004835" maxSpeed="5.504296" guiShape="rail/fast"/>
-<vType id="7" accel="3.816692" decel="2.983558" sigma="0.054062" length="8.688158" width="2.236287" minGap="2.802669" maxSpeed="4.682727" guiShape="bus/city"/>
-<vType id="8" accel="9.066209" decel="4.575714" sigma="0.316383" length="7.441016" width="8.010471" minGap="5.388228" maxSpeed="6.679295" guiShape="passenger/sedan"/>
-<vType id="9" accel="6.344990" decel="0.047135" sigma="0.273528" length="7.850740" width="2.517452" minGap="7.880354" maxSpeed="5.406194" guiShape="rail/light"/>
+<vType id="0" accel="1.790129" decel="0.632643" sigma="0.149929" length="7.889269" width="9.097183" minGap="8.248868" maxSpeed="4.013795" guiShape="bus/flexible"/>
+<vType id="1" accel="1.338034" decel="1.377474" sigma="0.721283" length="6.898605" width="9.977222" minGap="3.334836" maxSpeed="2.098643" guiShape="transport"/>
+<vType id="2" accel="0.118872" decel="1.430734" sigma="0.572042" length="2.709236" width="7.538949" minGap="3.001269" maxSpeed="2.677829" guiShape="rail/city"/>
+<vType id="3" accel="1.817727" decel="1.360144" sigma="0.507315" length="8.608773" width="8.565748" minGap="8.888453" maxSpeed="0.913868" guiShape="passenger"/>
+<vType id="4" accel="0.299491" decel="0.554371" sigma="0.808344" length="7.866264" width="2.647615" minGap="7.117411" maxSpeed="1.684806" guiShape="motorcycle"/>
+<vType id="5" accel="0.742803" decel="1.501209" sigma="0.307085" length="8.092814" width="3.981854" minGap="3.345033" maxSpeed="1.477315" guiShape="rail/slow"/>
+<vType id="6" accel="0.967546" decel="1.739467" sigma="0.583575" length="9.498709" width="1.640942" minGap="9.004835" maxSpeed="2.507382" guiShape="rail/fast"/>
+<vType id="7" accel="0.794255" decel="0.631794" sigma="0.054062" length="8.688158" width="2.236287" minGap="2.802669" maxSpeed="2.051867" guiShape="bus/city"/>
+<vType id="8" accel="1.817911" decel="0.942264" sigma="0.316383" length="7.441016" width="8.010471" minGap="5.388228" maxSpeed="3.158854" guiShape="passenger/sedan"/>
+<vType id="9" accel="1.287273" decel="0.059191" sigma="0.273528" length="7.850740" width="2.517452" minGap="7.880354" maxSpeed="2.452990" guiShape="rail/light"/>
 <route id="0" edges="0 2 4 6 8"/>
 <route id="1" edges="1"/>
 <route id="2" edges="2 4 6 8"/>

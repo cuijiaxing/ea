@@ -35,7 +35,7 @@ class VehicleType(object):
     guiShape = guiShapeArray[0]
     
     def __init__(self, v_id):
-        self.generateAVehicleTypeRandomly(v_id, 0, 10, 0, 10, -1, 1, 10, 1, 10, 1, 10, 1, 10, None)
+        self.generateAVehicleTypeRandomly(v_id, 0.05, 2, 0.05, 2, -1, 1, 10, 1, 10, 1, 10, 0.01,  5, None)
     
     def generateAVehicleTypeRandomly(self, v_id, minAccel, maxAccel, minDecel, maxDecel, sigma, minLength, maxLength, minWidth, maxWidth, minMinGap, maxMinGap, minMaxSpeed, maxMaxSpeed, carGUI):
         if minAccel > maxAccel:
