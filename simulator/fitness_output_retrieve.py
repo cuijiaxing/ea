@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 
 class OutputDataRetriever(object):
     
+    #It uses too much memory, we have to change the parsing method
     @classmethod
     def average(cls, inputFileName, nodeId, attrName):
         tree = ET.parse(inputFileName)
@@ -18,7 +19,3 @@ class OutputDataRetriever(object):
             return 0
         else:
             return summation / count        
-    
-
-if __name__ == "__main__":
-    print(OutputDataRetriever.average("../road_map/data/e1output.xml", 'e1det_1i_0', 'flow'))

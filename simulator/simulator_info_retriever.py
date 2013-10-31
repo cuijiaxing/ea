@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 class InfoRetriever(object):
     
+    #We have to use another way because this way uses too much memory
     #get all the detector ids from the id file
     @classmethod
     def getDetectorList(self, inputFileName):

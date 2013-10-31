@@ -22,7 +22,7 @@ class SUMOCommandExecutor(object):
     
     @classmethod
     def startSimulator(cls, configFileName, outputFileName):
-        pythonCommand = "sumo-gui"
+        pythonCommand = "sumo"
         sumoProcess = subprocess.Popen([pythonCommand, "-c", configFileName, "--tripinfo-output", outputFileName], stdout = sys.stdout, stderr = sys.stderr)
         sumoProcess.wait()
         print("simulator generated output file succefully")

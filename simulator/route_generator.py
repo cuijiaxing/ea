@@ -11,7 +11,7 @@ class RouteGenerator:
     #demand per second from different directions
     CarTypeNum = 10
     CarNum = 30000
-    TotalTimeStep = 36000
+    TotalTimeStep = 360
     
     
     #This is a facade method
