@@ -11,6 +11,8 @@ class SUMOUtils(object):
             if 'phase' in currentStr:
                 index = currentStr.find("<")
                 strList = currentStr.lstrip(" ").rstrip(" ").split(" ")
+                indNum = trafficLightCount / TrafficLight.StateNum
+                print indNum
                 trafficLight = individuals.genes[trafficLightCount / TrafficLight.StateNum]
                 trafficTime = trafficLight.times[trafficLightCount % TrafficLight.StateNum]
                 durationStr = 'duration="%d"' % trafficTime

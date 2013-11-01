@@ -9,6 +9,8 @@ from algorithms.simple_ga import SimpleGA
 from models.individual import Individual
 from models.population import Population
 
+from simulator.sumo_command import SUMOCommandExecutor
+
 
 def underscore_to_camelcase(value):
     def camelcase():
@@ -64,4 +66,5 @@ if __name__ == '__main__':
     algorithm = SimpleGA()
 
     # Run it!
+#     SUMOCommandExecutor.startANewRun(True)
     algorithm.run(initialPopulation, rounds, parentSelection(), recombination(), mutation(), survivorSelection())

@@ -9,8 +9,8 @@ class FitnessEvaluator:
     
     @classmethod
     def run(cls): 
-        detectorIdList= InfoRetriever.getDetectorList("../road_map/e1.add.xml")
-        return cls.evaluateFitness("../road_map/e1output.xml", detectorIdList, "flow")
+        detectorIdList= InfoRetriever.getDetectorList("road_map/e1.add.xml")
+        return cls.evaluateFitness("road_map/e1output.xml", detectorIdList, "flow")
         
     @classmethod   
     def evaluateFitness(cls, inputFileName, detectorIdList, targetAttrName):
@@ -24,7 +24,7 @@ class FitnessEvaluator:
     
     @classmethod
     def getEvaluationResult(cls, inputTrafficLights):
-        SUMOUtils.changeTrafficLight(inputTrafficLights, "../road_map/test.net.xml", "../road_map/testtemp.net.xml")
+        SUMOUtils.changeTrafficLight(inputTrafficLights, "road_map/test.net.xml", "road_map/testtemp.net.xml")
         SUMOCommandExecutor.startANewRun(False)
         return FitnessEvaluator.run()
     
