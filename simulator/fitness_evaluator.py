@@ -1,6 +1,7 @@
 from fitness_output_retrieve import OutputDataRetriever
 from simulator_info_retriever import InfoRetriever
 from simulator.sumo_command import SUMOCommandExecutor
+from simulator.sumo_utils import SUMOUtils
 class FitnessEvaluator:
     
     PORT = 8813
@@ -22,7 +23,8 @@ class FitnessEvaluator:
         return summation    
     
     @classmethod
-    def getEvaluationResult(cls, inputTraffic):
+    def getEvaluationResult(cls, inputTrafficLights):
+        SUMOUtils.changeTrafficLight(inputTrafficLights, "../road_map/test.net.xml", "../road_map/testtemp.net.xml")
         SUMOCommandExecutor.startANewRun(False)
         return FitnessEvaluator.run()
     
@@ -32,6 +34,7 @@ class FitnessEvaluator:
 #     sumoProcess.wait()
 #     print(FitnessEvaluator.run())
     #start a new run and do not generate new newwork
-#     SUMOCommandExecutor.startANewRun(False)
-#     print(FitnessEvaluator.run())
+if __name__ == "__main__":
+    SUMOCommandExecutor.startANewRun(True)
+    print(FitnessEvaluator.run())
     
