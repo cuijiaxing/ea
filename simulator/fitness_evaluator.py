@@ -34,7 +34,7 @@ class FitnessEvaluator:
 #     sumoProcess.wait()
 #     print(FitnessEvaluator.run())
     #start a new run and do not generate new newwork
-if __name__ == "__main__":
-    SUMOCommandExecutor.startANewRun(True)
-    print(FitnessEvaluator.run())
     
+# if __name__ == "__main__":
+#     SUMOCommandExecutor.startANewRun(True)
+#     print(FitnessEvaluator.run())

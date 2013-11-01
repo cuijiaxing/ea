@@ -20,7 +20,9 @@ class Individual(object):
         self.fitness = FitnessEvaluator.getEvaluationResult(self)
         
 if __name__ == "__main__":
-    ind = Individual.random(16)
-    print ind.evaluateFitness()
+    for i in xrange(5):
+        ind = Individual.random(16)
+        ind.evaluateFitness()
+        print ind.fitness
     
 

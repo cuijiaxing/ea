@@ -13,7 +13,7 @@ class SUMOUtils(object):
                 strList = currentStr.lstrip(" ").rstrip(" ").split(" ")
                 trafficLight = individuals.genes[trafficLightCount / TrafficLight.StateNum]
                 trafficTime = trafficLight.times[trafficLightCount % TrafficLight.StateNum]
-                durationStr = """duration="%d""" % trafficTime
+                durationStr = 'duration="%d"' % trafficTime
                 fileWriter.write(currentStr[0:index] + strList[0] + " " + durationStr + " " + strList[2])
                 trafficLightCount += 1
             else:
