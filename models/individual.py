@@ -18,11 +18,12 @@ class Individual(object):
     def evaluateFitness(self):
         #TODO implement by Cuijiaxing
         self.fitness = FitnessEvaluator.getEvaluationResult(self)
+        #print self.fitness
         
-if __name__ == "__main__":
-    for i in xrange(5):
-        ind = Individual.random(16)
-        ind.evaluateFitness()
-        print ind.fitness
+# if __name__ == "__main__":
+#     for i in xrange(5):
+#         ind = Individual.random(16)
+#         ind.evaluateFitness()
+#         print ind.fitness
     
 

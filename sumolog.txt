@@ -1,0 +1,1 @@
+FitnessValue= 113160.0
