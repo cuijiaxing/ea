@@ -2,7 +2,6 @@ from fitness_output_retrieve import OutputDataRetriever
 from simulator_info_retriever import InfoRetriever
 from simulator.sumo_command import SUMOCommandExecutor
 from simulator.sumo_utils import SUMOUtils
-from simulator.sumo_log import SUMOLog
 class FitnessEvaluator:
     
     PORT = 8813
@@ -21,8 +20,6 @@ class FitnessEvaluator:
             fitnessListForEachDetector.append(OutputDataRetriever.getFlowFromOneDetector(inputFileName, detectorId, targetAttrName))
         for i in xrange(len(fitnessListForEachDetector)):
             summation += fitnessListForEachDetector[i]
-        
-        SUMOLog.log("FitnessValue= " + str(summation) + "\n")
         return summation    
     
     @classmethod

@@ -41,7 +41,7 @@ class SUMOCommandExecutor(object):
                     print >> printer, """<node id="%d" x="%f" y="%f" type="%s"/>""" % (items[j].id, items[j].pos_x, items[j].pos_y, items[j].type)
             printer.write("</nodes>")
         edgeList = RoadEdge.generateEdgesAndWrite2File("road_map/test.edg.xml", nodeList)
-        RouteGenerator.generateRouteFile(nodeList, edgeList, 1000, 10, "road_map/test.rou.xml")
+        RouteGenerator.generateRouteFile(nodeList, edgeList, 100, 10, "road_map/test.rou.xml")
         SUMOCommandExecutor.generateNetworkFile("road_map/test.nod.xml", "road_map/test.edg.xml", "road_map/test.net.xml")
         SUMOCommandExecutor.generateE1Detector("road_map/test.net.xml", 100)
     
