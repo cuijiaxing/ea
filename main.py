@@ -71,3 +71,4 @@ if __name__ == '__main__':
     # Run it!
 #     SUMOCommandExecutor.startANewRun(True)
     algorithm.run(initialPopulation, rounds, parentSelection(), recombination(), mutation(), survivorSelection())
+    

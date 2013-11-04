@@ -21,5 +21,3 @@ class Individual(object):
         self.fitness = FitnessEvaluator.getEvaluationResult(self)
 
         SUMOLog.log(self.fitness, self.genes)
-
-        #print self.fitness

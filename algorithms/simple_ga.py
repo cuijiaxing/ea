@@ -2,6 +2,8 @@ from random import randint
 
 from models.population import Population
 
+from simulator.sumo_log import SUMOLog
+
 
 class SimpleGA(object):
 
@@ -24,8 +26,12 @@ class SimpleGA(object):
 
             self.population = survivorSelection.select(self.population, offsprings)
 
+        #write best to file
+        SUMOLog.writeBestToFile("BestLog.txt")
+
     def evaluatePopulationMetrics(self, currentRound):
         fitnesses = [individual.fitness for individual in self.population.individuals]
         avgFitness = sum(fitnesses) / self.population.size()
         maxFitness = max(fitnesses)
         print "Round {} | avg fitness {} | max fitness {}".format(currentRound, avgFitness, maxFitness)
+        
