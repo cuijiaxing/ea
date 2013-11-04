@@ -18,17 +18,8 @@ class Individual(object):
         return Individual(genes)
 
     def evaluateFitness(self):
-        #TODO implement by Cuijiaxing
         self.fitness = FitnessEvaluator.getEvaluationResult(self)
-        
-        SUMOLog.log(self.fitness, self.genes)
-        
-        #print self.fitness
-        
-# if __name__ == "__main__":
-#     for i in xrange(5):
-#         ind = Individual.random(16)
-#         ind.evaluateFitness()
-#         print ind.fitness
-    
 
+        SUMOLog.log(self.fitness, self.genes)
+
+        #print self.fitness
