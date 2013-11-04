@@ -14,8 +14,10 @@ class SimpleGA(object):
         self.population = initialPopulation
         for currentRound in xrange(rounds):
             for individual in self.population.individuals:
+                print "evaluating"
                 individual.evaluateFitness()
 
+            print "printing metrics"
             self.evaluatePopulationMetrics(currentRound)
 
             parents = parentSelection.select(self.population, 0.5)
@@ -33,5 +35,6 @@ class SimpleGA(object):
         fitnesses = [individual.fitness for individual in self.population.individuals]
         avgFitness = sum(fitnesses) / self.population.size()
         maxFitness = max(fitnesses)
-        print "Round {} | avg fitness {} | max fitness {}".format(currentRound, avgFitness, maxFitness)
+        with open('algo.log', 'a') as f:
+            f.write("Round {} | avg fitness {} | max fitness {}\n".format(currentRound, avgFitness, maxFitness))
         

@@ -17,7 +17,6 @@ def sample(population, sampleSize):
     currentMember = 0
     mu = sampleSize
     r = uniform(0, 1.0 / mu)
-    print "r", r
     individuals = population.individuals
     fitnessSum = 0
     for individual in individuals:
