@@ -9,9 +9,5 @@ class FitnessProportional(SurvivorSelection):
     def select(cls, population, offspring):
         """In order to maintain a stable population size, ensure that the result of this population has the same size as the population
         """
-        for individual in offspring.individuals:
-            individual.evaluateFitness()
-
         largerPopulation = Population(population.individuals + offspring.individuals)
-
         return stochastic_universal_sampling.sample(largerPopulation, population.size())

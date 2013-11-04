@@ -13,15 +13,15 @@ class SimpleGA(object):
     def run(self, initialPopulation, rounds, parentSelection, recombination, mutation, survivorSelection):
         self.population = initialPopulation
         for currentRound in xrange(rounds):
-            for individual in self.population.individuals:
-                print "evaluating"
-                individual.evaluateFitness()
+            self.population.evaluate()
 
             print "printing metrics"
             self.evaluatePopulationMetrics(currentRound)
 
             parents = parentSelection.select(self.population, 0.5)
             offsprings = recombination.recombine(parents)
+            offsprings.evaluate()
+
             for offspring in offsprings.individuals:
                 if randint(0, offsprings.size()) == 0:
                     mutation.mutate(offspring)
@@ -37,4 +37,3 @@ class SimpleGA(object):
         maxFitness = max(fitnesses)
         with open('algo.log', 'a') as f:
             f.write("Round {} | avg fitness {} | max fitness {}\n".format(currentRound, avgFitness, maxFitness))
-        
