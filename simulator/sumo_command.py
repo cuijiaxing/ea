@@ -11,7 +11,6 @@ class SUMOCommandExecutor(object):
         sumoProcess = subprocess.Popen([netconvertCommand,"--node-files", nodeFileName, "--edge-files", edgeFileName, "--output-file", outputFileName], stdout=sys.stdout, stderr=sys.stderr)
         sumoProcess.wait() 
         print("network file generated successfully")
-    
     @classmethod
     def generateE1Detector(cls, networkFileName, detectorLength):
         pythonCommand = "python"
