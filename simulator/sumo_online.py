@@ -45,7 +45,7 @@ class SUMOOnline:
 #         print(oriLogic[0]._phases[1]._duration)
         #inductionLoopIdList = traci.inductionloop.getIDList()
         #print(inductionLoopIdList)
-        for _ in xrange(100):
+        for _ in xrange(1000):
             #print traci.simulation.getCurrentTime()
             traci.simulationStep()
             print traci.inductionloop.getLastStepMeanSpeed('e1det_left0to0/0_1')
