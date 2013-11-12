@@ -9,7 +9,7 @@ class TrafficLight(object):
     StateNum = 8
 
     def __init__(self):
-        self.times = [random.randint(1, 100) for _ in xrange(self.StateNum)]
+        self.times = [random.randint(1, 1000) for _ in xrange(self.StateNum)]
     
     def __str__(self):
         return str(self.times)

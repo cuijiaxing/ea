@@ -27,12 +27,9 @@ class SUMOCommandExecutor(object):
         print("simulator generated output file succefully")
         
         
-        
-    
-    
     @classmethod
     def generateNodeEdgeAndRoutes(cls):
-        nodeList = RoadNode.generateGridRoadNodeList(-500, 500, -500, 500, 4, 4)
+        nodeList = RoadNode.generateGridRoadNodeList(-500, 500, -500, 500, 2, 2)
         with open("road_map/test.nod.xml", "w") as printer:
             printer.write("<nodes>\n")
             for items in nodeList:
@@ -51,6 +48,7 @@ class SUMOCommandExecutor(object):
         if changeNetwork:
             cls.generateNodeEdgeAndRoutes()
         cls.startSimulator("road_map/test.sumocfg", "road_map/tripinfo.xml")
+        
        
 # if __name__ == "__main__":
 #     SUMOCommandExecutor.startANewRun(True)

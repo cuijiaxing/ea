@@ -25,7 +25,7 @@ class FitnessEvaluator:
     @classmethod
     def getEvaluationResult(cls, inputTrafficLights):
         SUMOUtils.changeTrafficLight(inputTrafficLights, "road_map/test.net.xml", "road_map/testtemp.net.xml")
-        SUMOCommandExecutor.startANewRun(False)
+        SUMOCommandExecutor.startANewRun(True)
         return FitnessEvaluator.run()
     
             

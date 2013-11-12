@@ -4,9 +4,8 @@
 
     <input>
         <net-file value="test.net.xml"/>
-        <route-files value="my.rou.xml"/>
-        <!--<additional-files value="cross.det.xml"/>-->
-	<additional-files value="e1.add.xml"/>
+        <route-files value="test.rou.xml"/>
+        <additional-files value="test.det.xml"/>
     </input>
 
 
@@ -21,6 +20,7 @@
 
     <!--<traci_server>
         <remote-port value="8813"/>
-    </traci_server>-->
+    </traci_server>
+    -->
 
 </configuration>

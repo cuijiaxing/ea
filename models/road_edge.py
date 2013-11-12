@@ -1,6 +1,7 @@
 import random
 class RoadEdge(object):
-    
+   
+    IS_RANDOM = False; 
     def __init__(self, e_id, startNode, endNode, priority, numLanes, speed):
         self.id = e_id 
         self.startNode = startNode 
@@ -8,6 +9,8 @@ class RoadEdge(object):
         self.priority = priority 
         self.numLanes = numLanes 
         self.speed = speed
+        
+        
         
     #generate edges from vertical nodes
     @classmethod    
@@ -24,8 +27,12 @@ class RoadEdge(object):
                     continue
                 else:
                     #they can reach to each other directly
-                    priority = random.randint(1, 100)
-                    speedLimit = random.random() * 100
+                    if self.IS_RANDOM:
+                        priority = random.randint(1, 100)
+                        speedLimit = random.random() * 100
+                    else:
+                        priority = 100
+                        speedLimit= 100
                     edgeList.append(RoadEdge(edgeCount, verticalNodeList[i][j].id, verticalNodeList[i][j + 1].id, priority, 1, speedLimit))
                     edgeCount += 1
                     edgeList.append(RoadEdge(edgeCount, verticalNodeList[i][j + 1].id, verticalNodeList[i][j].id, priority, 1, speedLimit))
@@ -42,8 +49,12 @@ class RoadEdge(object):
                 if j == 0 or j == len(verticalNodeList[i]) - 1:
                     continue
                 else:
-                    priority = random.randint(1, 100)
-                    speedLimit = random.random() * 100
+                    if self.IS_RANDOM:
+                        priority = random.randint(1, 100)
+                        speedLimit = random.random() * 100
+                    else:
+                        priority = 100
+                        speedLimit = 100
                     edgeList.append(RoadEdge(edgeCount, verticalNodeList[i][j].id, verticalNodeList[i + 1][j].id, priority, 1, speedLimit))
                     edgeCount += 1
                     edgeList.append(RoadEdge(edgeCount, verticalNodeList[i + 1][j].id, verticalNodeList[i][j].id, priority, 1, speedLimit))
