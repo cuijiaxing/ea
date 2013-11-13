@@ -1,8 +1,6 @@
-from simulator.fitness_evaluator import FitnessEvaluator
-
 from models.traffic_light import TrafficLight
+from simulator.simulate import Simulate
 
-from simulator.sumo_log import SUMOLog
 
 
 class Individual(object):
@@ -18,6 +16,7 @@ class Individual(object):
         return Individual(genes)
 
     def evaluateFitness(self):
-        self.fitness = FitnessEvaluator.getEvaluationResult(self)
-
-        SUMOLog.log(self.fitness, self.genes)
+        ind = Simulate(8813, self)
+        self.fitness = ind.beginEvaluate()
+        
+        

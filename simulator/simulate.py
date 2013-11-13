@@ -1,9 +1,7 @@
-"""
-@package simulator
-"""
 import traci
-from models.individual import Individual
-class SUMOOnline:
+
+class Simulate:
+    trafficLightIdList = None
     
     def __init__(self, portNum, individual):
         """
@@ -14,6 +12,7 @@ class SUMOOnline:
         self.portNum = portNum
         #timing for each traffic light
         self.individual = individual 
+
     def beginEvaluate(self):
         """
         Given the parameters during initialization, we run the simulator to get the fitness
@@ -37,21 +36,25 @@ class SUMOOnline:
                 phaseList.append(traci.trafficlights.Phase(self.individual.genes[i].times[j], self.individual.genes[i].times[j], self.individual.genes[i].times[j], tlsLogicList._phases[j]._phaseDef))
             tlsLogicList._phases = phaseList
             traci.trafficlights.setCompleteRedYellowGreenDefinition(self.trafficLightIdList[i], tlsLogicList)
-        #close connection
-        
-#         oriLogic =  traci.trafficlights.getCompleteRedYellowGreenDefinition(self.trafficLightIdList[0])
-#         print(oriLogic[0]._phases[1]._duration)
-        #inductionLoopIdList = traci.inductionloop.getIDList()
-        #print(inductionLoopIdList)
-        for _ in xrange(300):
-            #print traci.simulation.getCurrentTime()
-            traci.simulationStep()
-            #print traci.inductionloop.getLastStepMeanSpeed('e1det_left0to0/0_1')
-            #print traci.inductionloop.getLastStepVehicleNumber('e1det_left0to0/0_1')
-            print traci.inductionloop.getLastStepMeanSpeed('e1det_left1to0/1_0')
-        traci.close()   
-        
+        if Simulate.trafficLightIdList == None:
+            Simulate.trafficLightIdList = traci.trafficlights.getIDList()
 
-if __name__ == "__main__":
-    instance = SUMOOnline(8813, Individual.random(16)) 
-    instance.beginEvaluate()
+        inductionLoopIdList = traci.inductionloop.getIDList()
+        totalSpeed = 0
+        for _ in xrange(1000):
+            traci.simulationStep()
+            #get the speed from all detectors
+            #notice that the value CA_CERTS
+#             if traci.inductionloop.getLastStepMeanSpeed(inductionLoopIdList[0]) > 1:
+#                 totalSpeed = totalSpeed + traci.inductionloop.getLastStepMeanSpeed(inductionLoopIdList[0])
+            for inductionLoop in inductionLoopIdList:
+                if traci.inductionloop.getLastStepMeanSpeed(inductionLoop) > 1:
+                    totalSpeed = totalSpeed + traci.inductionloop.getLastStepMeanSpeed(inductionLoop)
+                    #totalSpeed = totalSpeed + traci.inductionloop.getLastStepVehicleNumber(inductionLoop)
+        
+        traci.close()
+        self.fitness = totalSpeed / len(inductionLoopIdList)
+        return totalSpeed / len(inductionLoopIdList)
+
+
+
