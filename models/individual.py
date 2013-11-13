@@ -1,5 +1,6 @@
 from models.traffic_light import TrafficLight
 from simulator.simulate import Simulate
+from simulator.sumo import SUMO
 
 
 
@@ -16,7 +17,9 @@ class Individual(object):
         return Individual(genes)
 
     def evaluateFitness(self):
+        subProcess = SUMO.startSimulator("sumo/test.sumocfg")
         ind = Simulate(8813, self)
         self.fitness = ind.beginEvaluate()
+        subProcess.wait()
         
         
