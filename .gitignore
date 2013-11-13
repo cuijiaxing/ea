@@ -3,3 +3,6 @@
 .project
 .pydevproject
 .settings
+
+sumo/e1output.xml
+
