@@ -1,3 +1,6 @@
+from threading import Thread
+
+
 class Population(object):
 
     individuals = None

@@ -11,13 +11,14 @@ class Simulate:
         
         self.portNum = portNum
         #timing for each traffic light
-        self.individual = individual 
+        self.individual = individual
 
     def beginEvaluate(self):
         """
         Given the parameters during initialization, we run the simulator to get the fitness
         using port num to identify a connection
         """
+        print "evaluating on port " + str(self.portNum)
         traci.init(self.portNum, 10, "localhost", str(self.portNum))
         #print(traci.simulation.getCurrentTime())
         #get all the traffic lights id in the network

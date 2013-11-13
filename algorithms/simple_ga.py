@@ -15,7 +15,6 @@ class SimpleGA(object):
         for currentRound in xrange(rounds):
             self.population.evaluate()
 
-            print "printing metrics"
             self.evaluatePopulationMetrics(currentRound)
 
             parents = parentSelection.select(self.population, 0.5)
@@ -27,9 +26,6 @@ class SimpleGA(object):
                     mutation.mutate(offspring)
 
             self.population = survivorSelection.select(self.population, offsprings)
-
-        #write best to file
-        SUMOLog.writeBestToFile("BestLog.txt")
 
     def evaluatePopulationMetrics(self, currentRound):
         fitnesses = [individual.fitness for individual in self.population.individuals]

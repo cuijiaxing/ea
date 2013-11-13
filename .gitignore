@@ -5,4 +5,7 @@
 .settings
 
 sumo/e1output.xml
+NUL
+*.log
+BestLog.txt
 
