@@ -3,9 +3,15 @@
 .project
 .pydevproject
 .settings
-
+*.swp
+.DS_Store
 sumo/e1output.xml
 NUL
 *.log
 BestLog.txt
+*.DS_
 
+*.aux
+*.fdb_latexmk
+*.out
+*.synctex.gz
