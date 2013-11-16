@@ -4,7 +4,8 @@ from simulator.sumo import SUMO
 
 
 class Individual(object):
-
+    
+    dataDir = "."
     def __init__(self, genes):
         self.genes = genes
 
@@ -14,7 +15,7 @@ class Individual(object):
         return Individual(genes)
 
     def evaluateFitness(self, portNum=8813):
-        subProcess = SUMO.startSimulator("sumo/test.sumocfg", portNum=portNum)
+        subProcess = SUMO.startSimulator(self.dataDir + "test.sumocfg", portNum=portNum)
         ind = Simulate(portNum, self)
         self.fitness = ind.beginEvaluate()
         subProcess.wait()

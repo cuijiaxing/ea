@@ -26,6 +26,8 @@ def underscore_to_camelcase(value):
 
 #TODO use an argument parser to pass values as arguments
 if __name__ == '__main__':
+    #set the startdir
+    Individual.dataDir = "road_map/SampleRoad/GridLocalOptimum"
     random_seed = int((10000 * time()) % 1000000)
     print "random seed: {}".format(random_seed)
     seed(random_seed)
