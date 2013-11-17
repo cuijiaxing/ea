@@ -1,11 +1,13 @@
 from models.traffic_light import TrafficLight
 from simulator.simulate import Simulate
 from simulator.sumo import SUMO
+from os.path import join
 
 
 class Individual(object):
-    
-    dataDir = "."
+
+    dataDir = "./"
+
     def __init__(self, genes):
         self.genes = genes
 
@@ -15,7 +17,8 @@ class Individual(object):
         return Individual(genes)
 
     def evaluateFitness(self, portNum=8813):
-        subProcess = SUMO.startSimulator(self.dataDir + "test.sumocfg", portNum=portNum)
+        print self.dataDir
+        subProcess = SUMO.startSimulator(join(self.dataDir, "test.sumocfg"), portNum=portNum)
         ind = Simulate(portNum, self)
         self.fitness = ind.beginEvaluate()
         subProcess.wait()
