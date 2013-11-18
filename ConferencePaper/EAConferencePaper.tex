@@ -8,36 +8,36 @@
 \title{Traffic Flow Maximization using Evolutionary Algorithm}
 
 
-\author{
-David S.~Hippocampus\thanks{ Use footnote for providing further information
-about author (webpage, alternative address)---\emph{not} for acknowledging
-funding agencies.} \\
-Department of Computer Science\\
-Cranberry-Lemon University\\
-Pittsburgh, PA 15213 \\
-\texttt{hippo@cs.cranberry-lemon.edu} \\
-\And
-Coauthor \\
-Affiliation \\
-Address \\
-\texttt{email} \\
-\AND
-Coauthor \\
-Affiliation \\
-Address \\
-\texttt{email} \\
-\And
-Coauthor \\
-Affiliation \\
-Address \\
-\texttt{email} \\
-\And
-Coauthor \\
-Affiliation \\
-Address \\
-\texttt{email} \\
-(if needed)\\
-}
+% \author{
+% David S.~Hippocampus\thanks{ Use footnote for providing further information
+% about author (webpage, alternative address)---\emph{not} for acknowledging
+% funding agencies.} \\
+% Department of Computer Science\\
+% Cranberry-Lemon University\\
+% Pittsburgh, PA 15213 \\
+% \texttt{hippo@cs.cranberry-lemon.edu} \\
+% \And
+% Coauthor \\
+% Affiliation \\
+% Address \\
+% \texttt{email} \\
+% \AND
+% Coauthor \\
+% Affiliation \\
+% Address \\
+% \texttt{email} \\
+% \And
+% Coauthor \\
+% Affiliation \\
+% Address \\
+% \texttt{email} \\
+% \And
+% Coauthor \\
+% Affiliation \\
+% Address \\
+% \texttt{email} \\
+% (if needed)\\
+% }
 
 % The \author macro works with any number of authors. There are two commands
 % used to separate the names and addresses of multiple authors: \And and \AND.
@@ -58,8 +58,20 @@ Address \\
 \maketitle
 
 \begin{abstract}
-Traffic Flow maximization is one of the crucial problems in designing a city. It directly affects the daily life of the people living in that city. As it is a complex problem and there is not any existing deterministic algorithm can solve it perfectly. We propose using evolutionary algorithm to solve that problem. By comparing the previous work with what we did in this paper, we can easily conclue that it is beneficial to adopt evolutionary algorithm while we are designing the trafffic lights. 
+Traffic Flow maximization is one of the crucial problems in designing a city. It directly affects the daily life of the people living in that city. It is a complex problem, one that in most cases cannot be deterministically solved. We propose using evolutionary algorithms to solve that problem. We compare existing work and traffic flow with solutions yielded by our evolutionary approach, and our results show that it is beneficial to adopt this strategy when designing traffic light timings.
 \end{abstract}
+
+\section{Find a section title here}
+
+Traffic infrastructure comes in various forms, and optimizing traffic flow in road networks is a task that depends highly on the infrastructure. We commonly consider infrastructure as being in one of two categories:  ``smart'' infrastructure and ``legacy'' infrastructure. The first makes use of detectors placed in the infrastructure to determine the state of traffic, whereas the second does not.
+
+It is reasonable to assume that achieved solutions will perform better as a whole when making use of smart infrastructure. For example, a traffic light that can detect that there is no traffic from East to West, and that vehicles are waiting to go from North to South, can react accordingly and change its state to shorten the wait of these vehicles.
+
+There have been projects in the past where traffic flow was optimized by combining real-time knowledge of traffic and communication between lights. The best-known of these projects is one spearheaded by Carnegie Mellon University in the East Liberty part of Pittsburgh, with excellent results.
+
+However, this previous study's approach relies heavily on smart traffic lights and detectors, which, although quite practical, are still far and few between throughout the world. In countries such as China or India, where the number of vehicles is growing most rapidly, most roads are equipped with legacy traffic equipment.
+
+An effective approach to solving this problem should be applicable to the maximum amount of scenarios, which is why this paper discusses only optimizing traffic light timings in a legacy environment.
 
 \section{Submission of papers to NIPS 2013}
 
