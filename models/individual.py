@@ -6,6 +6,7 @@ from os.path import join
 
 class Individual(object):
 
+    timingCounts = [4, 2, 3, 2]
     dataDir = "./"
 
     def __init__(self, genes):
@@ -13,11 +14,10 @@ class Individual(object):
 
     @classmethod
     def random(cls, individualSize):
-        genes = [TrafficLight() for _ in xrange(individualSize)]
+        genes = [TrafficLight(cls.timingCounts[i]) for i in xrange(individualSize)]
         return Individual(genes)
 
     def evaluateFitness(self, portNum=8813):
-        print self.dataDir
         subProcess = SUMO.startSimulator(join(self.dataDir, "test.sumocfg"), portNum=portNum)
         ind = Simulate(portNum, self)
         self.fitness = ind.beginEvaluate()

@@ -12,4 +12,4 @@ class SimpleMutation(Mutation):
     @classmethod
     def mutate(cls, individual):
         random_position = randint(0, len(individual.genes) - 1)
-        individual.genes[random_position] = TrafficLight()
+        individual.genes[random_position] = TrafficLight(individual.timingCounts[random_position])

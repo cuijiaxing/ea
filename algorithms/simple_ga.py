@@ -29,7 +29,9 @@ class SimpleGA(object):
 
     def evaluatePopulationMetrics(self, currentRound):
         fitnesses = [individual.fitness for individual in self.population.individuals]
+        for individual in self.population.individuals:
+            print individual.fitness
+            print [light.times for light in individual.genes]
         avgFitness = sum(fitnesses) / self.population.size()
         maxFitness = max(fitnesses)
-        with open('algo.log', 'a') as f:
-            f.write("Round {} | avg fitness {} | max fitness {}\n".format(currentRound, avgFitness, maxFitness))
+        print "Round {} | avg fitness {} | max fitness {}\n".format(currentRound, avgFitness, maxFitness)
