@@ -134,7 +134,7 @@ not previous versions. Tweaking the style files may be grounds for rejection.
 
 The style files for NIPS and other conference information are available on the World Wide Web at
 \begin{center}
-   \url{http://www.nips.cc/}
+\url{http://www.nips.cc/}
 \end{center}
 The file \verb+nips2013.pdf+ contains these 
 instructions and illustrates the
@@ -186,13 +186,16 @@ When we are developing the algorithms to optimize the traffic lights, one common
 \subsection{Simple Java Simulator}
 \includegraphics[scale=0.5]{images/SimpleJavaSimulator.png} 
 This is a simple java simulator. It uses the multi-thread feature of java to speed up and it can automatically generate traffic flow data which are plotted at the right-down corner. Another advantage it has is that you can drag any car from one position to another. It will automatically adjust the position of the car and continues. Therefore, it enables us to adjust the traffic at any time we want. We can also adjust in real-time the timings of traffic lights. For simple road networks and light traffic flow, it is a great choice. However, in this kind of traffic network, there isn't much to optimize, which is why we didn't choose it as our final simulator. 
-
+\includegraphics[scale=0.5]{saea/images/SimpleJavaSimulator.png} 
+This is a simple java simulator. It uses the multi-therad feature of java to speed up and it can automatically generate traffic flow data which are plotted at the right-down corner. Another advantage it has is that you can drag any car from one position to another. It will automatically adjust the position of the car and continues. Therefore, it enables us to adjust the traffic at any time we want. If we only have a few streets and tens of cars, it is one of the best choice. We can specify the exact time of each traffic light by using it. However, in this kind of traffic network, we don't have much to optimize. Therefore we didn't choose it as our final simulator. 
 
 \subsection{MatSim}
-\includegraphics[scale=0.5]{images/matsim.png}
+\includegraphics[scale=0.5]{saea/images/matsim.png}
 Matsim is a powerful simulator which you can see from its simulated traffic networks. 
 \includegraphics[scale=0.5]{images/sim_image.png}
 It is open source, which means that developers can modify it as they wish and adapt it closely to their needs. Also it provides and interactive visualizer which enables users to modify the traffic networks conveniently. At the same time, it provides detailed analysis which can be used by our project. 
+\includegraphics[scale=0.5]{saea/images/sim_image.png}
+It is open source. Therefore, developer can benefit a lot from that and we can modify it as whatever we want. Also it provides interactive visualizer which enable users to modify the traffic networks conveniently. At the same time, it provides detailed analysis which can be used by our project. 
 
 \subsection{SUMO}
 After comparing carefully among several different simulators, we finally chose SUMO which was developed by employees of the Institute of Transportation Systems at the German Aerospace Center.
@@ -216,6 +219,8 @@ regarding figures, tables, acknowledgments, and references.
 \section{Simulated Traffic networks}
 In order to test our algorithm, we modeled the traffic network around the Caltrain station located in Mountain View, California. This choice was informed by the fact that it is a well-known intersection among our peers and we have heard a lot about its long wait times. We investigated the traffic situation around the Caltrain station and recorded the traffic timing during rush hour.
 \includegraphics[scale=0.3]{images/caltrain.png}
+In order to test our algorithm, we modeled the traffic network around Caltrain Station, Mountain View, California. The reason is that everyone  complains about it here. Therefore, we investigated the traffic situation around Caltrain Station and recorded the traffic timing during the rush hours.
+\includegraphics[scale=0.3]{saea/images/caltrain.png}
 
 \subsection{Headings: second level}
 
@@ -228,8 +233,15 @@ heading and 1/2~line space after the second level heading.
 Third level headings are lower case (except for first word and proper nouns),
 flush left, bold and in point size 10. One line space before the third level
 heading and 1/2~line space after the third level heading.
+
 \section{The choice of fitness function}
-In order to best simulate the real world traffic light, we tried several ways to establish the mapping between real world traffic measurement with the fitness function in our evolutionary algorithm.
+In order to best simulate the real world traffic light, we tried several ways to establish the mapping between real world traffic measurement with the fitness function in our evolutionary algorithm. The following are the fitness function we tried in our algorithm.
+\subsection{Average Speed}
+This is the first fitness function we tried. And it is the most intuitive one. An intuitive explanation is that if the average speed of a traffic network is larger that another, then it is more likely to have a greater traffic flow. We tried this fitness in the grid traffic network as shown in 
+\includegraphics[scale=0.3]{saea/images/gridoptimum.png}
+
+
+
 \section{Citations, figures, tables, references}
 \label{others}
 
