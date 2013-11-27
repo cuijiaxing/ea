@@ -9,49 +9,8 @@
 \title{Traffic Flow Maximization using Evolutionary Algorithm}
 
 
-% \author{
-% David S.~Hippocampus\thanks{ Use footnote for providing further information
-% about author (webpage, alternative address)---\emph{not} for acknowledging
-% funding agencies.} \\
-% Department of Computer Science\\
-% Cranberry-Lemon University\\
-% Pittsburgh, PA 15213 \\
-% \texttt{hippo@cs.cranberry-lemon.edu} \\
-% \And
-% Coauthor \\
-% Affiliation \\
-% Address \\
-% \texttt{email} \\
-% \AND
-% Coauthor \\
-% Affiliation \\
-% Address \\
-% \texttt{email} \\
-% \And
-% Coauthor \\
-% Affiliation \\
-% Address \\
-% \texttt{email} \\
-% \And
-% Coauthor \\
-% Affiliation \\
-% Address \\
-% \texttt{email} \\
-% (if needed)\\
-% }
-
-% The \author macro works with any number of authors. There are two commands
-% used to separate the names and addresses of multiple authors: \And and \AND.
-%
-% Using \And between authors leaves it to \LaTeX{} to determine where to break
-% the lines. Using \AND forces a linebreak at that point. So, if \LaTeX{}
-% puts 3 of 4 authors names on the first line, and the last on the second
-% line, try using \AND instead of \And before the third author name.
-
 \newcommand{\fix}{\marginpar{FIX}}
 \newcommand{\new}{\marginpar{NEW}}
-
-%\nipsfinalcopy % Uncomment for camera-ready version
 
 \begin{document}
 
@@ -101,10 +60,6 @@ This is a simple java simulator. It uses the multi-thread feature of java to spe
 
 Matsim is a powerful simulator which you can see from its simulated traffic networks. 
 It is open source, which means that developers can modify it as they wish and adapt it closely to their needs. Also it provides and interactive visualizer which enables users to modify the traffic networks conveniently. At the same time, it provides detailed analysis which can be used by our project.
-% \begin{figure}[]
-% \caption{A picture of a gull.}
-% \includegraphics[scale=0.5]{saea/images/sim_image.png}
-% \end{figure}
 
 \subsection{SUMO}
 After comparing carefully among several different simulators, we finally chose SUMO which was developed by employees of the Institute of Transportation Systems at the German Aerospace Center.
@@ -126,8 +81,41 @@ This is the first fitness function we tried. And it is the most intuitive one. A
 \caption{Basic Simulation}
 \includegraphics[width=\textwidth]{images/gridoptimum.png}
 \label{fig:gridoptimum}
-
 \end{figure}
+
+\section{Algorithms}
+\subsection{Genotype and Phenotype}
+
+
+\subsection{Simple GA}
+The first algorithm which we implemented was the Simple Genetic Algorithm. This textbook algorithm is made of several components, among which the following:
+\begin{itemize}
+ \item Parent Selection
+ \item Recombination
+ \item Mutation
+ \item Survivor Selection
+\end{itemize}
+Each of these components can be implemented in different ways and will give the algorithm a unique behavior. Furthermore, these components make use of constants that can be tweaked (mutation rate, parent population size), just as the algorithm's parameters (population size, number of rounds). Tuning these values will also change the behavior of the alorithm.
+
+Our implementation contains the following components:
+\begin{itemize}
+ \item Parent Selection: Rank-based selection, Stochastic Universal Sampling
+ \item Recombination: Single Point Crossover
+ \item Mutation: Simple Mutation
+ \item Survivor Selector: Rank-based selection, Stochastic Universal Sampling
+\end{itemize}
+
+
+
+\subsection{Simulated Annealing}
+
+\subsection{Alvin's Algorithm}
+
+
+\section{Proof-testing}
+
+
+\section{Results}
 
 
 \subsection{Footnotes}
