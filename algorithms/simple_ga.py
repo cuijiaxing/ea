@@ -17,7 +17,7 @@ class SimpleGA(object):
 
             self.evaluatePopulationMetrics(currentRound)
 
-            parents = parentSelection.select(self.population, 0.5)
+            parents = parentSelection.select(self.population, 6)
             offsprings = recombination.recombine(parents)
             offsprings.evaluate()
 
@@ -29,9 +29,9 @@ class SimpleGA(object):
 
     def evaluatePopulationMetrics(self, currentRound):
         fitnesses = [individual.fitness for individual in self.population.individuals]
-        for individual in self.population.individuals:
-            print individual.fitness
-            print [light.times for light in individual.genes]
-        avgFitness = sum(fitnesses) / self.population.size()
-        maxFitness = max(fitnesses)
+        avgFitness = int(sum(fitnesses) / self.population.size())
+        maxFitness = int(max(fitnesses))
         print "Round {} | avg fitness {} | max fitness {}\n".format(currentRound, avgFitness, maxFitness)
+        champion = self.population.individuals[0]
+        print champion.fitness
+        print [light.times for light in champion.genes]

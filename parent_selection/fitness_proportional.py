@@ -11,5 +11,5 @@ from utils import stochastic_universal_sampling
 class FitnessProportional(ParentSelection):
 
     @classmethod
-    def select(cls, population, ratio):
-        return stochastic_universal_sampling.sample(population, ratio * population.size())
+    def select(cls, population, count):
+        return stochastic_universal_sampling.sample(population, count)
