@@ -3,6 +3,7 @@
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{graphicx}
+\usepackage{amsmath}
 %\documentstyle[nips13submit_09,times,art10]{article} % For LaTeX 2.09
 
 
@@ -108,8 +109,52 @@ Our implementation contains the following components:
 
 
 \subsection{Simulated Annealing}
+In order to find the global optimum, we tried another algorithm which is called Simulated Annealing. The basic idea of this algorithm is to simulate the process of annealing. At the beginning, we have a high temperature in which the acceptance probability of individuals with bad fitness is high. Then temperature goes down slowly. The acceptance probability goes down as well. The way we encode our algorithm is as follows:
+\begin{equation}
+Simulated Annealing Gene:(T_1, T_2, T_3, T_4).
+\end{equation}
+Here $T_1, T_2, T_3, T_4$ represents the four traffic lights we measured around Caltrain Station respectively.
+The neighbor function is defined as following:
+\begin{equation}
+Write the presudo code here.
+\end{equation}
+The function for calculating acceptance rate is:
 
-\subsection{Alvin's Algorithm}
+
+Below is the result of using different scale factor 
+
+
+
+\subsection{Mutable Time-interval Genetic Algorithm(MTGA)}
+After carefully investigating the real world traffic, Quentin and I found out that the situation we dealt with is now like the real world situation exactly. Because, we are assuming that during a certain time interval, the traffic flow may vary from time to time. Even it is just a short time period such as 10 minutes. \\
+At first Quentin and I tried to assume that we fix the time period to a short time and optimize the traffic timing during that interval. However, we soon discovered that we would not want to divide the whole day into $\frac{24 * 60 * 60}{10} = 8640$ sub intervals and run our algorithm for such a huge number. Therefore, we designed this new algorithm. We call it Mutable Time-interval Genetic Algorithm. We treat it as a kind of Genetic Algorithm. It has the following features which will be explained later.
+\begin{itemize}
+	\item Hybrid Gene Type.
+	\item No Crossover
+	\item Special Mutation Type
+\end{itemize}
+The first and most important feature of MTGA is that it has a hybrid gene type. Below is how we encode the chromosome.
+\begin{align}
+Mutable Time-inverval Gene:
+(&T_{1,1}, T_{1,2}, T_{1,3}, T_{1,4},\\
+&T_{2,1}, T_{2,2}, T_{2,3}, T_{2,4},\\
+&...,\\
+&T_{n,1}, T_{n, 2}, T_{n,3}, T_{n, 4},\\
+&I_1, I_2, ..., I_n).
+\end{align}
+In the above equation, the a in the subscript of $T_{a,b}$ represents the time for the ath time interval and b represents the bth phase of a traffic light. For simplicity, in our example, we have only 1 traffic light. This traffic light has 4 phases which is the reason that b can be 4 at max. And we subdivide the whole time interval that we want to optimize our algorithm in into  sub regions. $I_1, I_2, ...$ represents the length of each phase respectively. One thing that we have to mention is that the sum of $I_2, I_2, ...$ should be a fixed constant which represents the length of the time interval we want to estimate our algorithm in. It can be expressed like this:
+\begin{equation}
+\label{equ_sum_fixed}
+I_2 + I_2 + I_3 + ... + I_n = T
+\end{equation} 
+where T represents the time interval between start time and end time.\\
+
+Another important feature is that you cannot really perform crossover in MTGA although they align with each other very well. The reason comes from its special chromosome. Because we usually want to optimize the traffic light for a fixed time interval, therefore, $I_1 + I_2 + ... + I_n$ has to be fixed to the length of the time interval. If we perform crossover between two individuals, the sum of these numbers will change. Although we can find a way to perform crossover between two individuals, we didn't add this feature into our algorithm.
+
+The last feature is that we have to perform special mutation in MTGA. In the first part of the chromosome, we can perform mutation as usual. However as stated above, we have to change at least two genes at together because of equation \ref{equ_sum_fixed}. For example, we want to change ${I_1}$. Let's assume that, previously, we have $I_1 = 40, I_2 = 40, I_3 = 100$. If we try to mutate$I_1$ from 40 to 20. We can set $I_1 = 20$. However, we have to do either $I_2=60$ or $I_3=120$ as well in order to keep consistent to equation:\ref{equ_sum_fixed}. 
+
+
+\subsection{Fixed Time-interval Genetic Algorithm}
 
 
 \section{Proof-testing}
