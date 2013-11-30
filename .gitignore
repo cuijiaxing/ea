@@ -16,4 +16,5 @@ BestLog.txt
 *.out
 *.synctex.gz
 *.tex.backup
+ConferencePaper/*.pdf
 
