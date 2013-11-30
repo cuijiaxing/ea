@@ -4,6 +4,7 @@
 \usepackage{url}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{float}
 %\documentstyle[nips13submit_09,times,art10]{article} % For LaTeX 2.09
 
 
@@ -47,16 +48,16 @@ Research on traffic lights optimization began since the emergence of traffic lig
 When we are developing the algorithms to optimize the traffic lights, one common thing that we will do is to find a simulator. There are tons of simulators on the Internet, we have to choose the one that fits our project the most. The following are the simulators we investigated.
 \subsection{Simple Java Simulator}
 \begin{figure}
-\caption{Screenshot of the Simple Java Simulator}
- \includegraphics[width=\textwidth]{images/simulator/SimpleJavaSimulator.png} 
+ \includegraphics[width=4in]{images/simulator/SimpleJavaSimulator.png}
+ \caption{Screenshot of the Simple Java Simulator} 
 \end{figure}
 
 This is a simple java simulator. It uses the multi-thread feature of java to speed up and it can automatically generate traffic flow data which are plotted at the right-down corner. Another advantage it has is that you can drag any car from one position to another. It will automatically adjust the position of the car and continues. Therefore, it enables us to adjust the traffic at any time we want. We can also adjust in real-time the timings of traffic lights. For simple road networks and light traffic flow, it is a great choice. However, in this kind of traffic network, there isn't much to optimize, which is why we didn't choose it as our final simulator. 
 
 \subsection{MatSim}
 \begin{figure}[]
-\caption{Screenshot of the Matsim simulator}
- \includegraphics[width=\textwidth]{images/simulator/matsim_zurich.png}
+ \includegraphics[width=4in]{images/simulator/matsim_zurich.png}
+ \caption{Screenshot of the Matsim simulator}
 \end{figure}
 
 Matsim is a powerful simulator which you can see from its simulated traffic networks. 
@@ -68,8 +69,8 @@ After comparing carefully among several different simulators, we finally chose S
 \section{Simulated Traffic networks}
 In order to test our algorithm, we modeled the traffic network around the Caltrain station located in Mountain View, California. This choice was informed by the fact that it is a well-known intersection among our peers and we have heard a lot about its long wait times. We investigated the traffic situation around the Caltrain station: during rush hour, we recorded the traffic flow as well as the traffic light timings.
 \begin{figure}
+\includegraphics[width=4in]{images/simulator/caltrain.png}
 \caption{Caltrain Station Simulation}
-\includegraphics[width=\textwidth]{images/simulator/caltrain.png}
 \end{figure}
 
 
@@ -79,8 +80,8 @@ In order to best simulate the real world traffic light, we tried several ways to
 This is the first fitness function we tried. And it is the most intuitive one. An intuitive explanation is that if the average speed of a traffic network is larger that another, then it is more likely to have a greater traffic flow. We tried this fitness in the grid traffic network as shown in figure~\ref{fig:gridoptimum}.
 
 \begin{figure}
+\includegraphics[width=4in]{images/simulator/gridoptimum.png}
 \caption{Basic Simulation}
-\includegraphics[width=\textwidth]{images/simulator/gridoptimum.png}
 \label{fig:gridoptimum}
 \end{figure}
 
@@ -175,7 +176,30 @@ In order to test FTGA, we designed the following experiment:
 
 
 \section{Results}
+Below are two sets of experiments we did.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{images/FTGA/exp1/10.png}
+\caption{Generation = 10}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{images/FTGA/exp1/20.png}
+\caption{Generation = 20}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{images/FTGA/exp1/30.png}
+\caption{Generation = 30}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{images/FTGA/exp1/40.png}
+\caption{Generation = 40}
+\end{figure}
 
+\subsection{Experiment Conclusion}
+From the previous section, we can see how these algorithms perform. The red line represents the performance of FTGA in each figure. The green line represents the performance of SGA and the blue line represents SA. It is normal for the fitness of SA to fluctuate during the whole process and its fitness finally goes to the maximum value that it can achieve. SGA has a relative high fitness in the very beginning, then it get stuck at some local optimum. FTGA performs the best among these three algorithms. 
 
 \subsection{Footnotes}
 
