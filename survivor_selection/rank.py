@@ -10,4 +10,4 @@ class Rank(SurvivorSelection):
         """
         largerPopulation = Population(population.individuals + offspring.individuals)
         sortedIndividuals = sorted(largerPopulation.individuals, key=lambda x: x.fitness, reverse=True)
-        return Population(sortedIndividuals[:population.size()])
+        return Population(sortedIndividuals[1:population.size()] + [sortedIndividuals[-1]])

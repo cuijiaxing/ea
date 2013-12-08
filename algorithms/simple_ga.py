@@ -22,8 +22,8 @@ class SimpleGA(object):
             offsprings.evaluate()
 
             for offspring in offsprings.individuals:
-                if randint(0, offsprings.size()) == 0:
-                    mutation.mutate(offspring)
+#                 if randint(0, offsprings.size()) == 0:
+                mutation.mutate(offspring)
 
             self.population = survivorSelection.select(self.population, offsprings)
 
@@ -31,7 +31,9 @@ class SimpleGA(object):
         fitnesses = [individual.fitness for individual in self.population.individuals]
         avgFitness = int(sum(fitnesses) / self.population.size())
         maxFitness = int(max(fitnesses))
-        print "Round {} | avg fitness {} | max fitness {}\n".format(currentRound, avgFitness, maxFitness)
-        champion = self.population.individuals[0]
+        print "Round {} | avg fitness {} | max fitness {}".format(currentRound, avgFitness, maxFitness)
+        sortedIndividuals = sorted(self.population.individuals, key=lambda x: x.fitness, reverse=True)
+        champion = sortedIndividuals[0]
         print champion.fitness
         print [light.times for light in champion.genes]
+        print "\n"
