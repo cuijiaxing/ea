@@ -1,5 +1,5 @@
 \documentclass{article} % For LaTeX2e
-% \usepackage{nips13submit_e,times}
+\usepackage{nips13submit_e,times}
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{graphicx}
@@ -11,6 +11,31 @@
 
 
 \title{Traffic Flow Maximization using Evolutionary Algorithm}
+
+\author{
+David S.~Hippocampus\thanks{ Use footnote for providing further information
+about author (webpage, alternative address)---\emph{not} for acknowledging
+funding agencies.} \\
+Department of Computer Science\\
+Cranberry-Lemon University\\
+Pittsburgh, PA 15213 \\
+\texttt{email} \\
+\And
+Coauthor \\
+Affiliation \\
+Address \\
+\texttt{email} \\
+\AND
+Coauthor \\
+Affiliation \\
+Address \\
+\texttt{email} \\
+\And
+Coauthor \\
+Affiliation \\
+Address \\
+\texttt{email} \\
+}
 
 
 \newcommand{\fix}{\marginpar{FIX}}
@@ -78,7 +103,8 @@ In order to test our algorithm, we modeled the traffic network around the Caltra
 \section{The choice of the fitness function}
 In order to best simulate the real world traffic light, we tried several ways to establish the mapping between real world traffic measurement with the fitness function in our evolutionary algorithm. The following are the fitness function we tried in our algorithm.
 \subsection{Average Speed}
-This is the first fitness function we tried. And it is the most intuitive one. An intuitive explanation is that if the average speed of a traffic network is larger that another, then it is more likely to have a greater traffic flow. We tried this fitness in the grid traffic network.% as shown in figure~\ref{fig:gridoptimum}.
+\textcolor{red}{Please add something here. I am short of words...}\\
+This is the first fitness function we tried. And it is the most intuitive one. An intuitive explanation is that if the average speed of a traffic network is larger that another, then it is more likely to have a greater traffic flow. We tried this fitness in the grid traffic network. as shown in figure~\ref{fig:gridoptimum}.
 
 %\begin{figure}[h]
 %\centering
@@ -88,6 +114,7 @@ This is the first fitness function we tried. And it is the most intuitive one. A
 %\end{figure}
 
 \subsection{Throughput}
+\textcolor{red}{Please add something here. I am short of words...}\\
 However, after carefully thinking, we find out that average speed is a biased measure of the whole traffic network because there are different number of cars on different roads. And calculating the global average won't make any sense if there are no cars on a certain road. Therefore, we decided to use the throughput the traffic network as the fitness. It represents the number of cars that have reached their destination in a fixed time interval.
 
 \section{Algorithms}
