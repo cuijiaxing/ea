@@ -52,20 +52,23 @@ Sanchez Medina has used evolutionary algorithms to evolve traffic light timings 
 A common and key ingredient in developing evolutionary algorithms is the choice of a simulator. We investigated several traffic simulators (see below) and chose the one that suits our project the best.
 
 \subsection{Simple Java Simulator}
-% \begin{figure}
-%  \includegraphics[width=4in]{images/simulator/SimpleJavaSimulator.png}
-%  \caption{Screenshot of the Simple Java Simulator} 
-% \end{figure}
+ \begin{figure}[h]
+ \label{fig:simulator_java}
+ \centering
+  \includegraphics[width=0.5 \textwidth]{images/simulator/SimpleJavaSimulator.png}
+  \caption{Screenshot of the Simple Java Simulator} 
+ \end{figure}
 
-This simulator can automatically generate and plot. Another feature is the ability to to drag any car from one position to another. The simulator will automatically adjust the position of the car and continue. Furthermore, it is possible to adjust in real-time the timings of traffic lights. For simple road networks and light traffic flow, it is a great choice. However, in this kind of traffic network, there isn't much to optimize, which is why we didn't choose it as our final simulator. 
+This Java simulator showed in Figure \ref{fig:simulator_java} can automatically generate and plot. Another feature is the ability to to drag any car from one position to another. The simulator will automatically adjust the position of the car and continue. Furthermore, it is possible to adjust in real-time the timings of traffic lights. For simple road networks and light traffic flow, it is a great choice. However, in this kind of traffic network, there isn't much to optimize, which is why we didn't choose it as our final simulator. 
 
 \subsection{MatSim}
-% \begin{figure}[]
-%  \includegraphics[width=4in]{images/simulator/matsim_zurich.png}
-%  \caption{Screenshot of the Matsim simulator}
-% \end{figure}
-
-Matsim is a powerful simulator which you can see from its simulated traffic networks. 
+Matsim showed in Figure \ref{fig:simulator_matsim} is a powerful simulator which you can see from its simulated traffic networks.
+ \begin{figure}[h]
+ \label{fig:simulator_matsim}
+ \centering
+  \includegraphics[width=0.5\textwidth]{images/simulator/matsim_zurich.png}
+  \caption{Screenshot of the Matsim simulator}
+ \end{figure}
 It is open source, which means that developers can modify it as they wish and adapt it closely to their needs. Also it provides and interactive visualizer which enables users to modify the traffic networks conveniently. At the same time, it provides detailed analysis which can be used by our project.
 
 \subsection{SUMO}
@@ -73,8 +76,9 @@ After comparing carefully among several different simulators, we finally chose S
 
 \section{Simulated Traffic networks}
 In order to test our algorithm, we modeled the traffic network around the Caltrain station located in Mountain View, California. This choice was informed by the fact that it is a well-known intersection among our peers and we have heard complaints about its long wait times. We investigated the traffic situation around the Caltrain station: during rush hour, we recorded the traffic flow as well as the traffic light timings.
-\begin{figure}
-\includegraphics[width=4in]{images/simulator/caltrain.png}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{images/simulator/caltrain.png}
 \caption{Caltrain Station Simulation}
 \end{figure}
 
@@ -84,11 +88,15 @@ In order to best simulate the real world traffic light, we tried several ways to
 \subsection{Average Speed}
 This is the first fitness function we tried. And it is the most intuitive one. An intuitive explanation is that if the average speed of a traffic network is larger that another, then it is more likely to have a greater traffic flow. We tried this fitness in the grid traffic network as shown in figure~\ref{fig:gridoptimum}.
 
-% \begin{figure}
-% \includegraphics[width=4in]{images/simulator/gridoptimum.png}
-% \caption{Basic Simulation}
-% \label{fig:gridoptimum}
-% \end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{images/simulator/gridoptimum.png}
+\caption{Basic Simulation}
+\label{fig:gridoptimum}
+\end{figure}
+
+\subsection{Throughput}
+After carefully thinking, we find out that average speed is a biased measure of the whole traffic network because there are different number of cars on different roads. And calculating the global average won't make any sense if there are no cars on a certain road. Therefore, we decided to use the throughput the traffic network as the fitness. It represents the number of cars that have reached their destination in a fixed time interval.
 
 \section{Algorithms}
 
@@ -134,24 +142,27 @@ After some initial parameter tweaking, the first batch of parameters used was:
 
 
 \subsubsection{Issues encountered}
-The major encountered with this algorithm was premature convergence. The initial version reached a local optimum in less than ten generations, and did not budge afterwards. This usually means that the algorithms was lacking in diversity maintenance mecanisms. At first, we decided to ensure that the population's worst individual was always maintained from one round to another. This by itself did not bring about an important improvement. 
+The major encountered with this algorithm was premature convergence. The initial version reached a local optimum in less than ten generations, and did not budge afterwards. This usually means that the algorithms was lacking in diversity maintenance mechanisms. At first, we decided to ensure that the population's worst individual was always maintained from one round to another. This by itself did not bring about an important improvement. 
 We then decided to systematically remove the best individual from the population. The combination of these two modifications allowed us to notice that the algorithm continued to improve on a steady basis, even after the ten first rounds. The algorithm was exploring more of the search space thanks to the increased diversity of its population.
 
 
 \subsection{Simulated Annealing}
 In order to find the global optimum, we tried another algorithm which is called Simulated Annealing. The basic idea of this algorithm is to simulate the process of annealing. At the beginning, we have a high temperature in which the acceptance probability of individuals with bad fitness is high. Then temperature goes down slowly. The acceptance probability goes down as well. The way we encode our algorithm is as follows:
 \begin{equation}
-Simulated Annealing Gene:(T_1, T_2, T_3, T_4).
+T_1, T_2, T_3, T_4
 \end{equation}
 Here $T_1, T_2, T_3, T_4$ represents the four traffic lights we measured around Caltrain Station respectively.
-The neighbor function is defined as following:
-\begin{equation}
-Write the presudo code here.
-\end{equation}
+The neighbor function we used is to randomly choose a gene in the individual and replace it with a new one.
 The function for calculating acceptance rate is:
-
+\begin{equation}
+\frac{1}{1 + \frac{e^{\Delta} F}{T}}
+\end{equation}
 
 Below is the result of using different scale factor 
+
+\subsubsection{Issues encountered}
+Basically, we can treat SA as a kind of EA. However, it has only one individual in the population. During the process of solving the optimization problem, SA encountered the same problem with SGA. As it doesn't have a large population, therefore, it can get stuck by local optimum. Another reason SA cannot get the global optimum easily is that it also treats the whole time interval as a whole. Therefore, when the traffic flow can be divided into several different traffic flows microscopically, it is not possible for SA to find the global optimum. 
+
 
 \subsection{Mutable Time-interval Genetic Algorithm (MTGA)}
 Our initial assumption was to work on time intervals during which the traffic flow is constant. However, after many simulations, we realized that even in a situation where the overall traffic flow is constant, the interaction between intersections and traffic lights creates a somewhat chaotic system where traffic flow at specific intersection can vary quite a bit. 
@@ -163,14 +174,9 @@ It became clear that we could achieve better results by further dividing our tim
 	\item Special Mutation Type
 \end{itemize}
 The first and most important feature of MTGA is that it has a hybrid gene type. Below is how we encode the chromosome.
-\begin{align}
-Mutable Time-inverval Gene:
-(&T_{1,1}, T_{1,2}, T_{1,3}, T_{1,4},\\
-&T_{2,1}, T_{2,2}, T_{2,3}, T_{2,4},\\
-&...,\\
-&T_{n,1}, T_{n, 2}, T_{n,3}, T_{n, 4},\\
-&I_1, I_2, ..., I_n).
-\end{align}
+\begin{equation}
+T_{1,1}, T_{1,2}, T_{1,3}, T_{1,4},T_{2,1}, T_{2,2}, T_{2,3}, T_{2,4},...,T_{n,1}, T_{n, 2},T_{n,3}, T_{n, 4},I_1, I_2, ..., I_n
+\end{equation}
 In the above equation, the a in the subscript of $T_{a,b}$ represents the time for the ath time interval and b represents the bth phase of a traffic light. For simplicity, in our example, we have only 1 traffic light. This traffic light has 4 phases which is the reason that b can be 4 at max. And we subdivide the whole time interval that we want to optimize our algorithm in into  sub regions. $I_1, I_2, ...$ represents the length of each phase respectively. One thing that we have to mention is that the sum of $I_2, I_2, ...$ should be a fixed constant which represents the length of the time interval we want to estimate our algorithm in. It can be expressed like this:
 \begin{equation}
 \label{equ_sum_fixed}
@@ -185,13 +191,9 @@ The last feature is that we have to perform special mutation in MTGA. In the fir
 
 \subsection{Fixed Time-interval Genetic Algorithm (FTGA)}
 Based on the above algorithm, we came up with a modified version of the MTGA: the Fixed Time-interval Genetic Algorithm (FTGA). The simple idea is to get rid of $I_1, I_2, ..., I_n$ which are encoded in equation\ref{equ_sum_fixed}. We will ourselves decide to split the time interval into a number of equal-length sub-intervals: $I_1=I_2=...=I_n$. This means that we don't need to store the intervals in the chromosomes anymore. The chromosome's representation is the following:
-\begin{align}
-Fixed Time-inverval Gene:
-(&T_{1,1}, T_{1,2}, T_{1,3}, T_{1,4},\\
-&T_{2,1}, T_{2,2}, T_{2,3}, T_{2,4},\\
-&...,\\
-&T_{n,1}, T_{n, 2}, T_{n,3}, T_{n, 4})\\
-\end{align}
+\begin{equation}
+T_{1,1}, T_{1,2}, T_{1,3}, T_{1,4},T_{2,1}, T_{2,2}, T_{2,3}, T_{2,4},...,T_{n,1}, T_{n, 2},T_{n,3}, T_{n, 4}
+\end{equation}
 By limiting $T_{a,b}$ to a certain domain such as (1,100), we don't even have to perform the special mutation either. What we can do with normal Genetic Algorithm can be applied to this chromosome as well. And another important feature that FTGA has is that it has fewer parameters which means it takes us a shorter time to get the result. 
 
 
