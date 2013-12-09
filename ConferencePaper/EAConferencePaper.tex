@@ -12,29 +12,23 @@
 
 \title{Traffic Flow Maximization using Evolutionary Algorithm}
 
+
 \author{
-David S.~Hippocampus\thanks{ Use footnote for providing further information
-about author (webpage, alternative address)---\emph{not} for acknowledging
-funding agencies.} \\
-Department of Computer Science\\
-Cranberry-Lemon University\\
-Pittsburgh, PA 15213 \\
-\texttt{email} \\
+Cui Jiaxing \\
+ECE Department\\
+Carnegie Mellon University\\
+Mountain View, CA \\
+\texttt{jiaxingc@andrew.cmu.edu} \\
 \And
-Coauthor \\
-Affiliation \\
-Address \\
-\texttt{email} \\
+Quentin de Metz \\
+ECE Department \\
+Carnegie Mellon University\\
+Mountain View, CA \\
+\texttt{qdemetz@andrew.cmu.edu} \\
 \AND
-Coauthor \\
-Affiliation \\
-Address \\
-\texttt{email} \\
+  \\
 \And
-Coauthor \\
-Affiliation \\
-Address \\
-\texttt{email} \\
+  \\
 }
 
 
@@ -67,11 +61,11 @@ However, operating in a legacy environment does not mean that we must forgo all 
 In our analysis, we place ourselves in an environment where the traffic flow is a fixed parameter. The above analysis shows that this scenario is relevant.
 
 \section{Existing Domain Research}
-Researchers have come up with several different ways to optimize traffic lights in the past. Many studies have focused on adding sophisticated detectors at intersections, or on adding features to the traffic lights to leverage existing traffic theory results and artificial intelligence once the lights are capable of transmitting the state of the intersection to their neighbors. This approach is the one pursued by Ken Walters of Carnegie Mellon University and has produced good results.
+Researchers have come up with several different ways to optimize traffic lights in the past. Many studies have focused on adding sophisticated detectors at intersections, or on adding features to the traffic lights to leverage existing traffic theory results and artificial intelligence once the lights are capable of transmitting the state of the intersection to their neighbors. This approach is the one pursued by Ken Walters of Carnegie Mellon University and has produced good results ([1]).
 
-Jansson used evolutionary algorithms to optimize traffic, but only in the context of one traffic light. He produced a microcontroller implementation for his simulator and his results state that his evolutionary approach yielded better results than a deterministic approach as soon as the problem reached a certain size.
+Jansson used evolutionary algorithms to optimize traffic, but only in the context of one traffic light. He produced a microcontroller implementation for his simulator and his results state that his evolutionary approach yielded better results than a deterministic approach as soon as the problem reached a certain size ([3]).
 
-Sanchez Medina has used evolutionary algorithms to evolve traffic light timings on several major streets throughout Spain. They implemented a Standard Genetic Algorithm based on truncation and elitism. Although their paper deals talks mostly about designing and programming a custom simulator, their conclusions state that they produced good (but not great) results during their experiments.
+Sanchez Medina has used evolutionary algorithms to evolve traffic light timings on several major streets throughout Spain. They implemented a Standard Genetic Algorithm based on truncation and elitism. Although their paper deals talks mostly about designing and programming a custom simulator, their conclusions state that they produced good (but not great) results during their experiments ([4]).
 
 
 \section{Simulators}
@@ -90,32 +84,34 @@ In order to test our algorithm, we modeled the traffic network around the Caltra
 \begin{figure}[h]
  \centering
   \subfigure[Java Simulator]{ \label{fig:simulator_java}
-   \includegraphics[width=0.3\textwidth]{images/simulator/SimpleJavaSimulator.png}}
+   \includegraphics[width=0.45\textwidth]{images/simulator/SimpleJavaSimulator.png}}
   \subfigure[Matsim]{ \label{fig:simulator_matsim} %% label for second subfigure 
-  \includegraphics[width=0.3\textwidth]{images/simulator/matsim_zurich.png}}
+  \includegraphics[width=0.45\textwidth]{images/simulator/matsim_zurich.png}}
   \subfigure[SUMO]{ \label{fig:sumo} %% label for second subfigure 
-  \includegraphics[width=0.3\textwidth]{images/simulator/caltrain.png}}
+  \includegraphics[width=0.75\textwidth]{images/simulator/caltrain.png}}
   \caption{Simulators}
    \label{fig:simulator} %% label for entire figure 
 \end{figure}
 
 
-\section{The choice of the fitness function}
+\section{Fitness Function}
 In order to best simulate the real world traffic light, we tried several ways to establish the mapping between real world traffic measurement with the fitness function in our evolutionary algorithm. The following are the fitness function we tried in our algorithm.
 \subsection{Average Speed}
-\textcolor{red}{Please add something here. I am short of words...}\\
-This is the first fitness function we tried. And it is the most intuitive one. An intuitive explanation is that if the average speed of a traffic network is larger that another, then it is more likely to have a greater traffic flow. We tried this fitness in the grid traffic network. as shown in figure~\ref{fig:gridoptimum}.
+The first fitness function we designed was the average speed of the vehicles in the network. This is an intuitive metrics, in that if the average speed of a traffic network is larger than that of another, then we can expect its traffic flow to be equally larger. We used this fitness function when testing our algorithms in the grid traffic network, as shown in figure~\ref{fig:gridoptimum}.
 
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=0.5\textwidth]{images/simulator/%gridoptimum.png}
-%\caption{Basic Simulation}
-%\label{fig:gridoptimum}
-%\end{figure}
+However, this fitness function did not fit well with the simulator we were using. Indeed, the SUMO simulator had no easy means of recovering the average speed of a vehicle at a given time. In the above experiment we had resorted to placing detectors at specific places along the network; these detectors could measure the velocity of vehicles passing next to them (think of them as speed radars). Whereas this approach worked well in a simple traffic network, placing a number of detectors along multiple roads in a real-world, intricate network was a tedious task. Furthermore, our fitness function was not detector-location agnostic, which means that the placement of the detectors directly impacted the fitness values that we measured, and in turn could greatly impact the results of our algorithms. We decided to move on to a simpler fitness function.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{images/simulator/gridoptimum.png}
+\caption{Basic Simulation}
+\label{fig:gridoptimum}
+\end{figure}
 
 \subsection{Throughput}
-\textcolor{red}{Please add something here. I am short of words...}\\
-However, after carefully thinking, we find out that average speed is a biased measure of the whole traffic network because there are different number of cars on different roads. And calculating the global average won't make any sense if there are no cars on a certain road. Therefore, we decided to use the throughput the traffic network as the fitness. It represents the number of cars that have reached their destination in a fixed time interval.
+When modelizing the traffic flow in the simulator, we created many different routes that the vehicles would use. When the simulator placed a new vehicle in the network, it chose an a path for the vehicle from within a list of predermined paths that we had decided upon. It made sense to evaluate how many vehicles were making it to their destination in the fixed, allocated time that our simulation was running in, and we chose this as a metric for our fitness function. Intuitively, it is related to the throughput of the traffic network.
+
+This fitness function was much simpler to implement on larger, more complex networks. However, we noticed one significant drawback: not all paths had equal length, nor an equal number of traffic lights on them. This meant that the algorithm tended to optimize the network for paths that were shorter (an easier target because there were less traffic lights to optimize). This bias affected the early results of our algorithms, but we nonetheless managed to achieve significant results.
 
 \section{Algorithms}
 
@@ -217,7 +213,7 @@ where T represents the time interval between start time and end time.\\
 
 Another important feature is that you cannot really perform crossover in MTGA although they align with each other very well. The reason comes from its special chromosome. Because we usually want to optimize the traffic light for a fixed time interval, therefore, $I_1 + I_2 + ... + I_n$ has to be fixed to the length of the time interval. If we perform crossover between two individuals, the sum of these numbers will change. Although we can find a way to perform crossover between two individuals, we didn't add this feature into our algorithm.
 
-The last feature is that we have to perform special mutation in MTGA. In the first part of the chromosome, we can perform mutation as usual. However as stated above, we have to change at least two genes at together because of equation \ref{equ_sum_fixed}. For example, we want to change ${I_1}$. Let's assume that, previously, we have $I_1 = 40, I_2 = 40, I_3 = 100$. If we try to mutate$I_1$ from 40 to 20. We can set $I_1 = 20$. However, we have to do either $I_2=60$ or $I_3=120$ as well in order to keep consistent to equation:\ref{equ_sum_fixed}. 
+The last feature is that we have to perform special mutation in MTGA. In the first part of the chromosome, we can perform mutation as usual. However as stated above, we have to change at least two genes at together because of equation \ref{equ_sum_fixed}. For example, we want to change ${I_1}$. Let's assume that, previously, we have $I_1 = 40, I_2 = 40, I_3 = 100$. If we try to mutate$I_1$ from 40 to 20. We can set $I_1 = 20$. However, we have to do either $I_2=60$ or $I_3=120$ as well in order to keep consistent to equation \ref{equ_sum_fixed}. 
 
 
 \subsection{Fixed Time-interval Genetic Algorithm (FTGA)}
@@ -247,8 +243,6 @@ According to the result we get from multiple experiments, we can see that, SGA a
 \textcolor{red}{Please Finish this section, Quentin}
 
 \subsubsection*{References}
-
-\textcolor{red}{You should refer to these reference in the paper since you added them here.}
 
 \small{
 [1] Walters, Ken (2012) Smart Traffic Signals Pilot Results: Pollution Plunges, Traffic Clogs Cleared. \url{http://www.cmu.edu/news/stories/archives/2012/september/sept24_smarttrafficsignals.html}
