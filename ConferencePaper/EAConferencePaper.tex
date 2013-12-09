@@ -230,8 +230,15 @@ By limiting $T_{a,b}$ to a certain domain such as (1,100), we don't even have to
 
 \section{Experiment \& Result}
 \subsection{Result}
-\textcolor{red}{I will finish this part}
+\textcolor{blue}{I will finish this part}
 \subsection{Conclusion}
+\subsubsection{The limitation of traditional optimization}
+Having investigated a lot work done by others, we found out that almost all of them are based on traditional methods which treat the time interval as a whole. It is a trivial way to solve the problem since EA can deal with this situation perfectly with the unnecessary constraint that the time interval cannot be subdivided. Actually, when it comes to real-world, unpredictable accident happens. Therefore, these factors can affect the traffic flow from time to time. We human beings may not find the subtle difference easily. However, properly designed algorithms are able to find them out.
+
+SGA and SA represent two kinds of traditional algorithms that treat the time interval we want to optimize as a whole. They showed some ability to improve the traffic flow. However, they reach their bottlenecks easily. In some scenarios, they can never get the global optimum. 
+
+FTGA and MTGA are specially designed for subdividing the whole time interval into sub-regions. Therefore, they both have the ability to improve the max fitness that SGA and SA and achieve. Although they use different approaches to divide the time interval, they turned out to be feasible to find the global optimum. 
+
 According to the result we get from multiple experiments, we can see that, SGA and SA can optimize the traffic to a certain extent. As FTGA and MTGA have the ability to subdivide the whole time interval into smaller ones, they can further improve the traffic timing. Also, we have stated that FTGA is a simplified version of MTGA. However, it behaves almost as well as MTGA. And it is much easier to implement.
 
 
@@ -241,11 +248,7 @@ According to the result we get from multiple experiments, we can see that, SGA a
 
 \subsubsection*{References}
 
-References follow the acknowledgments. Use unnumbered third level heading for
-the references. Any choice of citation style is acceptable as long as you are
-consistent. It is permissible to reduce the font size to `small' (9-point) 
-when listing the references. {\bf Remember that this year you can use
-a ninth page as long as it contains \emph{only} cited references.}
+\textcolor{red}{You should refer to these reference in the paper since you added them here.}
 
 \small{
 [1] Walters, Ken (2012) Smart Traffic Signals Pilot Results: Pollution Plunges, Traffic Clogs Cleared. \url{http://www.cmu.edu/news/stories/archives/2012/september/sept24_smarttrafficsignals.html}
