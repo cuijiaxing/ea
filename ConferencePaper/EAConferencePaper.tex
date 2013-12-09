@@ -5,6 +5,8 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{float}
+\usepackage{subfigure}
+\usepackage{color}
 %\documentstyle[nips13submit_09,times,art10]{article} % For LaTeX 2.09
 
 
@@ -48,38 +50,28 @@ Sanchez Medina has used evolutionary algorithms to evolve traffic light timings 
 
 
 \section{Simulators}
-\label{gen_inst}
 A common and key ingredient in developing evolutionary algorithms is the choice of a simulator. We investigated several traffic simulators (see below) and chose the one that suits our project the best.
-
 \subsection{Simple Java Simulator}
- \begin{figure}[h]
- \label{fig:simulator_java}
- \centering
-  \includegraphics[width=0.5 \textwidth]{images/simulator/SimpleJavaSimulator.png}
-  \caption{Screenshot of the Simple Java Simulator} 
- \end{figure}
-
 This Java simulator showed in Figure \ref{fig:simulator_java} can automatically generate and plot. Another feature is the ability to to drag any car from one position to another. The simulator will automatically adjust the position of the car and continue. Furthermore, it is possible to adjust in real-time the timings of traffic lights. For simple road networks and light traffic flow, it is a great choice. However, in this kind of traffic network, there isn't much to optimize, which is why we didn't choose it as our final simulator. 
-
 \subsection{MatSim}
-Matsim showed in Figure \ref{fig:simulator_matsim} is a powerful simulator which you can see from its simulated traffic networks.
- \begin{figure}[h]
- \label{fig:simulator_matsim}
- \centering
-  \includegraphics[width=0.5\textwidth]{images/simulator/matsim_zurich.png}
-  \caption{Screenshot of the Matsim simulator}
- \end{figure}
-It is open source, which means that developers can modify it as they wish and adapt it closely to their needs. Also it provides and interactive visualizer which enables users to modify the traffic networks conveniently. At the same time, it provides detailed analysis which can be used by our project.
-
+Matsim showed in Figure \ref{fig:simulator_matsim} is a powerful simulator which you can see from its simulated traffic networks. It is open source, which means that developers can modify it as they wish and adapt it closely to their needs. Also it provides and interactive visualizer which enables users to modify the traffic networks conveniently. At the same time, it provides detailed analysis which can be used by our project.
 \subsection{SUMO}
-After comparing carefully among several different simulators, we finally chose SUMO which was developed by employees of the Institute of Transportation Systems at the German Aerospace Center.
+After comparing carefully among several different simulators, we finally chose SUMO which was developed by employees of the Institute of Transportation Systems at the German Aerospace Center. Figure \ref{fig:sumo} shows how it looks like. It can handle complex situations and have a good perform even when the number of cars is very large. Also it can deal with collisions, acceleration and deceleration.
 
 \section{Simulated Traffic networks}
-In order to test our algorithm, we modeled the traffic network around the Caltrain station located in Mountain View, California. This choice was informed by the fact that it is a well-known intersection among our peers and we have heard complaints about its long wait times. We investigated the traffic situation around the Caltrain station: during rush hour, we recorded the traffic flow as well as the traffic light timings.
+In order to test our algorithm, we modeled the traffic network around the Caltrain station located in Mountain View, California. This choice was informed by the fact that it is a well-known intersection among our peers and we have heard complaints about its long wait times. We investigated the traffic situation around the Caltrain station: during rush hour, we recorded the traffic flow as well as the traffic light timings. Figure \ref{fig:sumo} shows the traffic network around Caltrain Station.
+
+%differnt kinds of simulator
 \begin{figure}[h]
-\centering
-\includegraphics[width=0.5\textwidth]{images/simulator/caltrain.png}
-\caption{Caltrain Station Simulation}
+ \centering
+  \subfigure[Java Simulator]{ \label{fig:simulator_java}
+   \includegraphics[width=0.3\textwidth]{images/simulator/SimpleJavaSimulator.png}}
+  \subfigure[Matsim]{ \label{fig:simulator_matsim} %% label for second subfigure 
+  \includegraphics[width=0.3\textwidth]{images/simulator/matsim_zurich.png}}
+  \subfigure[SUMO]{ \label{fig:sumo} %% label for second subfigure 
+  \includegraphics[width=0.3\textwidth]{images/simulator/caltrain.png}}
+  \caption{Simulators}
+   \label{fig:simulator} %% label for entire figure 
 \end{figure}
 
 
@@ -147,6 +139,7 @@ We then decided to systematically remove the best individual from the population
 
 
 \subsection{Simulated Annealing}
+\subsubsection{Overview}
 In order to find the global optimum, we tried another algorithm which is called Simulated Annealing. The basic idea of this algorithm is to simulate the process of annealing. At the beginning, we have a high temperature in which the acceptance probability of individuals with bad fitness is high. Then temperature goes down slowly. The acceptance probability goes down as well. The way we encode our algorithm is as follows:
 \begin{equation}
 T_1, T_2, T_3, T_4
@@ -158,7 +151,18 @@ The function for calculating acceptance rate is:
 \frac{1}{1 + \frac{e^{\Delta} F}{T}}
 \end{equation}
 
-Below is the result of using different scale factor 
+Figure \ref{fig:diff_f} is the result for using different scale factors. X-axis represents time and y-axis represents acceptance of bad individuals.
+\begin{figure}[h]
+ \centering
+  \subfigure[F=10]{ \label{fig:subfig:a}
+   \includegraphics[width=0.3\textwidth]{images/exp/f=10.png}}
+  \subfigure[F=20]{ \label{fig:subfig:b} %% label for second subfigure 
+  \includegraphics[width=0.3\textwidth]{images/exp/f=20.png}}  
+  \subfigure[F=30]{ \label{fig:subfig:c} %% label for second subfigure 
+  \includegraphics[width=0.3\textwidth]{images/exp/f=30.png}} 
+  \caption{different factor}
+   \label{fig:diff_f} %% label for entire figure 
+\end{figure}
 
 \subsubsection{Issues encountered}
 Basically, we can treat SA as a kind of EA. However, it has only one individual in the population. During the process of solving the optimization problem, SA encountered the same problem with SGA. As it doesn't have a large population, therefore, it can get stuck by local optimum. Another reason SA cannot get the global optimum easily is that it also treats the whole time interval as a whole. Therefore, when the traffic flow can be divided into several different traffic flows microscopically, it is not possible for SA to find the global optimum. 
@@ -197,55 +201,15 @@ T_{1,1}, T_{1,2}, T_{1,3}, T_{1,4},T_{2,1}, T_{2,2}, T_{2,3}, T_{2,4},...,T_{n,1
 By limiting $T_{a,b}$ to a certain domain such as (1,100), we don't even have to perform the special mutation either. What we can do with normal Genetic Algorithm can be applied to this chromosome as well. And another important feature that FTGA has is that it has fewer parameters which means it takes us a shorter time to get the result. 
 
 
-\section{Experiment}
-In order to test FTGA, we designed the following experiment:
-\begin{itemize}
-	\item Run the algorithm with different generation and compare the result with SGA and SA.
-	\item change the random number generator and do the experiments for several times and compared the result with SGA and SA.
-	In all the experiments, the traffic flow is the same. And the simulation step is 600. The fitness evaluation function we used is the throughput of the system.
-	
-\end{itemize}
+\section{Experiment \& Result}
 
-
-\section{Results}
-Below are two sets of experiments we did.
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.3]{images/FTGA/exp1/10.png}
-\caption{Generation = 10}
-\end{figure}
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.3]{images/FTGA/exp1/20.png}
-\caption{Generation = 20}
-\end{figure}
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.3]{images/FTGA/exp1/30.png}
-\caption{Generation = 30}
-\end{figure}
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.3]{images/FTGA/exp1/40.png}
-\caption{Generation = 40}
-\end{figure}
-
-\subsection{Experiment Conclusion}
+\subsection{Conclusion}
 From the previous section, we can see how these algorithms perform. The red line represents the performance of FTGA in each figure. The green line represents the performance of SGA and the blue line represents SA. It is normal for the fitness of SA to fluctuate during the whole process and its fitness finally goes to the maximum value that it can achieve. SGA has a relative high fitness in the very beginning, then it gets stuck at some local optimum. FTGA performs the best among these three algorithms. 
 
-\subsection{Footnotes}
-
-Indicate footnotes with a number\footnote{Sample of the first footnote} in the
-text. Place the footnotes at the bottom of the page on which they appear.
-Precede the footnote with a horizontal rule of 2~inches
-(12~picas).\footnote{Sample of the second footnote}
 
 \subsubsection*{Acknowledgments}
 
-Use unnumbered third level headings for the acknowledgments. All
-acknowledgments go at the end of the paper. Do not include 
-acknowledgments in the anonymized submission, only in the 
-final paper. 
+\textcolor{red}{Please Finish this section}
 
 \subsubsection*{References}
 
