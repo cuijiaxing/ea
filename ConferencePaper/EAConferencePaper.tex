@@ -40,7 +40,12 @@ However, operating in a legacy environment does not mean that we must forgo all 
 In our analysis, we place ourselves in an environment where the traffic flow is a fixed parameter. The above analysis shows that this scenario is relevant.
 
 \section{Existing Domain Research}
-Research on traffic lights optimization began since the emergence of traffic lights. Researchers have come up with several different ways to optimize the traffic lights such as 
+Researchers have come up with several different ways to optimize traffic lights in the past. Many studies have focused on adding sophisticated detectors at intersections, or on adding features to the traffic lights to leverage existing traffic theory results and artificial intelligence once the lights are capable of transmitting the state of the intersection to their neighbors. This approach is the one pursued by Ken Walters of Carnegie Mellon University and has produced good results.
+
+Jansson used evolutionary algorithms to optimize traffic, but only in the context of one traffic light. He produced a microcontroller implementation for his simulator and his results state that his evolutionary approach yielded better results than a deterministic approach as soon as the problem reached a certain size.
+
+Sanchez Medina has used evolutionary algorithms to evolve traffic light timings on several major streets throughout Spain. They implemented a Standard Genetic Algorithm based on truncation and elitism. Although their paper deals talks mostly about designing and programming a custom simulator, their conclusions state that they produced good (but not great) results during their experiments.
+
 
 \section{Simulators}
 \label{gen_inst}
@@ -74,7 +79,7 @@ In order to test our algorithm, we modeled the traffic network around the Caltra
 \end{figure}
 
 
-\section{The choice of fitness function}
+\section{The choice of the fitness function}
 In order to best simulate the real world traffic light, we tried several ways to establish the mapping between real world traffic measurement with the fitness function in our evolutionary algorithm. The following are the fitness function we tried in our algorithm.
 \subsection{Average Speed}
 This is the first fitness function we tried. And it is the most intuitive one. An intuitive explanation is that if the average speed of a traffic network is larger that another, then it is more likely to have a greater traffic flow. We tried this fitness in the grid traffic network as shown in figure~\ref{fig:gridoptimum}.
@@ -86,10 +91,10 @@ This is the first fitness function we tried. And it is the most intuitive one. A
 \end{figure}
 
 \section{Algorithms}
-\subsection{Genotype and Phenotype}
-
 
 \subsection{Simple GA}
+
+\subsubsection{Overview}
 The first algorithm which we implemented was the Simple Genetic Algorithm. This textbook algorithm is made of several components, among which the following:
 \begin{itemize}
  \item Parent Selection
@@ -103,10 +108,34 @@ Our implementation contains the following components:
 \begin{itemize}
  \item Parent Selection: Rank-based selection, Stochastic Universal Sampling
  \item Recombination: Single Point Crossover
- \item Mutation: Simple Mutation
+ \item Mutation: Simple Mutation: replacing one traffic light by a randomly generated traffic light
  \item Survivor Selector: Rank-based selection, Stochastic Universal Sampling
 \end{itemize}
 
+The genotype we used was the following:
+\begin{equation}
+  (Light_1, Light_2, Light_3, Light_4)
+\end{equation}
+
+Where each light is represented as follows:
+\begin{equation}
+ Light_1 = (t_1, t_2, t_3, t_4)
+\end{equation}
+Where $t_i$ represents the timing of the light for its first phase. \\
+$\;$\\
+After some initial parameter tweaking, the first batch of parameters used was:
+\begin{itemize}
+ \item Population size: 20
+ \item Number of rank-selected parents: 6
+ \item Number of offspring created: 6
+ \item Mutation of one out of the six offspring
+ \item Selection of the top 20 individuals from the new population to form the basis for the next generation
+\end{itemize}
+
+
+\subsubsection{Issues encountered}
+The major encountered with this algorithm was premature convergence. The initial version reached a local optimum in less than ten generations, and did not budge afterwards. This usually means that the algorithms was lacking in diversity maintenance mecanisms. At first, we decided to ensure that the population's worst individual was always maintained from one round to another. This by itself did not bring about an important improvement. 
+We then decided to systematically remove the best individual from the population. The combination of these two modifications allowed us to notice that the algorithm continued to improve on a steady basis, even after the ten first rounds. The algorithm was exploring more of the search space thanks to the increased diversity of its population.
 
 
 \subsection{Simulated Annealing}
@@ -225,10 +254,13 @@ when listing the references. {\bf Remember that this year you can use
 a ninth page as long as it contains \emph{only} cited references.}
 
 \small{
-[1] Alexander, J.A. \& Mozer, M.C. (1995) Template-based algorithms
-for connectionist rule extraction. In G. Tesauro, D. S. Touretzky
-and T.K. Leen (eds.), {\it Advances in Neural Information Processing
-Systems 7}, pp. 609-616. Cambridge, MA: MIT Press.
+[1] Walters, Ken (2012) Smart Traffic Signals Pilot Results: Pollution Plunges, Traffic Clogs Cleared. \url{http://www.cmu.edu/news/stories/archives/2012/september/sept24_smarttrafficsignals.html}
+
+[2] Xiaoming You (2008) Urban intelligent traffic operation optimization control strategy based on real-corded evolutionary algorithm. \url{http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=4598052}
+
+[3] Jansson, Gustaf (2010) Traffic Control with Standard Genetic Algorithm \url{http://publications.lib.chalmers.se/records/fulltext/138247.pdf}
+
+[4] Sanchez Medina, Javier J (2008) Evolutionary Computation Applied to Urban Traffic Optimization \url{http://cdn.intechopen.com/pdfs/5247/InTech-Evolutionary_computation_applied_to_urban_traffic_optimization.pdf}
 
 [2] Bower, J.M. \& Beeman, D. (1995) {\it The Book of GENESIS: Exploring
 Realistic Neural Models with the GEneral NEural SImulation System.}
