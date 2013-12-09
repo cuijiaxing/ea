@@ -78,17 +78,17 @@ In order to test our algorithm, we modeled the traffic network around the Caltra
 \section{The choice of the fitness function}
 In order to best simulate the real world traffic light, we tried several ways to establish the mapping between real world traffic measurement with the fitness function in our evolutionary algorithm. The following are the fitness function we tried in our algorithm.
 \subsection{Average Speed}
-This is the first fitness function we tried. And it is the most intuitive one. An intuitive explanation is that if the average speed of a traffic network is larger that another, then it is more likely to have a greater traffic flow. We tried this fitness in the grid traffic network as shown in figure~\ref{fig:gridoptimum}.
+This is the first fitness function we tried. And it is the most intuitive one. An intuitive explanation is that if the average speed of a traffic network is larger that another, then it is more likely to have a greater traffic flow. We tried this fitness in the grid traffic network.% as shown in figure~\ref{fig:gridoptimum}.
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.5\textwidth]{images/simulator/gridoptimum.png}
-\caption{Basic Simulation}
-\label{fig:gridoptimum}
-\end{figure}
+%\begin{figure}[h]
+%\centering
+%\includegraphics[width=0.5\textwidth]{images/simulator/%gridoptimum.png}
+%\caption{Basic Simulation}
+%\label{fig:gridoptimum}
+%\end{figure}
 
 \subsection{Throughput}
-After carefully thinking, we find out that average speed is a biased measure of the whole traffic network because there are different number of cars on different roads. And calculating the global average won't make any sense if there are no cars on a certain road. Therefore, we decided to use the throughput the traffic network as the fitness. It represents the number of cars that have reached their destination in a fixed time interval.
+However, after carefully thinking, we find out that average speed is a biased measure of the whole traffic network because there are different number of cars on different roads. And calculating the global average won't make any sense if there are no cars on a certain road. Therefore, we decided to use the throughput the traffic network as the fitness. It represents the number of cars that have reached their destination in a fixed time interval.
 
 \section{Algorithms}
 
@@ -202,14 +202,15 @@ By limiting $T_{a,b}$ to a certain domain such as (1,100), we don't even have to
 
 
 \section{Experiment \& Result}
-
+\subsection{Result}
+\textcolor{red}{I will finish this part}
 \subsection{Conclusion}
-From the previous section, we can see how these algorithms perform. The red line represents the performance of FTGA in each figure. The green line represents the performance of SGA and the blue line represents SA. It is normal for the fitness of SA to fluctuate during the whole process and its fitness finally goes to the maximum value that it can achieve. SGA has a relative high fitness in the very beginning, then it gets stuck at some local optimum. FTGA performs the best among these three algorithms. 
+According to the result we get from multiple experiments, we can see that, SGA and SA can optimize the traffic to a certain extent. As FTGA and MTGA have the ability to subdivide the whole time interval into smaller ones, they can further improve the traffic timing. Also, we have stated that FTGA is a simplified version of MTGA. However, it behaves almost as well as MTGA. And it is much easier to implement.
 
 
 \subsubsection*{Acknowledgments}
 
-\textcolor{red}{Please Finish this section}
+\textcolor{red}{Please Finish this section, Quentin}
 
 \subsubsection*{References}
 
