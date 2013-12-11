@@ -277,7 +277,22 @@ SGA and SA represent two kinds of traditional algorithms that treat the time int
 
 FTGA and MTGA are specially designed for subdividing the whole time interval into sub-regions. Therefore, they both have the ability to improve the max fitness that SGA and SA and achieve. Although they use different approaches to divide the time interval, they turned out to be feasible to find the global optimum. 
 
-According to the result we get from multiple experiments, we can see that, SGA and SA can optimize the traffic to a certain extent. As FTGA and MTGA have the ability to subdivide the whole time interval into smaller ones, they can further improve the traffic timing. Also, we have stated that FTGA is a simplified version of MTGA. However, it behaves almost as well as MTGA. And it is much easier to implement.
+\begin{table}
+\centering
+\renewcommand\arraystretch{2.5}
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Algorithm} & \textbf{Maximum Fitness} & \textbf{Success Times} \\ \hline
+    Original  & 123             & N/N             \\ \hline
+    SGA       & 143             & 11/40           \\ \hline
+    SA        & 143             & 34/40           \\ \hline
+    FTGA      & 143             & 38/40           \\ \hline
+    MTGA      & 143             & 38/40           \\ \hline
+    \end{tabular}
+    \caption {Performance of Algorithms}
+\end{table}
+
+According to the result we get from multiple experiments, we can see that, SGA and SA can optimize the traffic to a certain extent. Although SGA and SA and achive the glboal optimum at times, they are not guaranteed to find ti. As FTGA and MTGA have the ability to subdivide the whole time interval into smaller ones, they can further improve the traffic timing. Therefore, they are more likely to find the global optimum. Also, we have stated that FTGA is a simplified version of MTGA. However, it behaves almost as well as MTGA. And it is much easier to implement.
 
 
 \subsubsection*{Acknowledgments}
