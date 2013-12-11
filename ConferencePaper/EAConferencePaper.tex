@@ -279,7 +279,7 @@ FTGA and MTGA are specially designed for subdividing the whole time interval int
 
 \begin{table}
 \centering
-\renewcommand\arraystretch{2.5}
+\renewcommand\arraystretch{2}
     \begin{tabular}{|l|l|l|}
     \hline
     \textbf{Algorithm} & \textbf{Maximum Fitness} & \textbf{Success Times} \\ \hline
@@ -290,9 +290,10 @@ FTGA and MTGA are specially designed for subdividing the whole time interval int
     MTGA      & 143             & 38/40           \\ \hline
     \end{tabular}
     \caption {Performance of Algorithms}
+    \label{tab:pa}
 \end{table}
 
-According to the result we get from multiple experiments, we can see that, SGA and SA can optimize the traffic to a certain extent. Although SGA and SA and achive the glboal optimum at times, they are not guaranteed to find ti. As FTGA and MTGA have the ability to subdivide the whole time interval into smaller ones, they can further improve the traffic timing. Therefore, they are more likely to find the global optimum. Also, we have stated that FTGA is a simplified version of MTGA. However, it behaves almost as well as MTGA. And it is much easier to implement.
+According to the result from table \ref{tab:pa}, we can see that, SGA and SA can optimize the traffic to a certain extent. Although SGA and SA and achive the glboal optimum at times, they are not guaranteed to find ti. As FTGA and MTGA have the ability to subdivide the whole time interval into smaller ones, they can further improve the traffic timing. Therefore, they are more likely to find the global optimum. Also, we have stated that FTGA is a simplified version of MTGA. However, it behaves almost as well as MTGA. And it is much easier to implement.
 
 
 \subsubsection*{Acknowledgments}
