@@ -76,7 +76,7 @@ Matsim showed in Figure \ref{fig:simulator_matsim} is a powerful simulator which
 \subsection{SUMO}
 After comparing carefully among several different simulators, we finally chose SUMO which was developed by employees of the Institute of Transportation Systems at the German Aerospace Center. Figure \ref{fig:sumo} shows how it looks like. It can handle complex situations and have a good perform even when the number of cars is very large. Also it can deal with collisions, acceleration and deceleration.
 
-\section{Simulated Traffic networks}
+\section{Simulated Traffic Networks}
 In order to test our algorithm, we modeled the traffic network around the Caltrain station located in Mountain View, California. This choice was informed by the fact that it is a well-known intersection among our peers and we have heard complaints about its long wait times. We investigated the traffic situation around the Caltrain station: during rush hour, we recorded the traffic flow as well as the traffic light timings. Figure \ref{fig:sumo} shows the traffic network around Caltrain Station.
 
 %differnt kinds of simulator
@@ -96,16 +96,16 @@ In order to test our algorithm, we modeled the traffic network around the Caltra
 \section{Fitness Function}
 In order to best simulate the real world traffic light, we tried several ways to establish the mapping between real world traffic measurement with the fitness function in our evolutionary algorithm. The following are the fitness function we tried in our algorithm.
 \subsection{Average Speed}
-The first fitness function we designed was the average speed of the vehicles in the network. This is an intuitive metrics, in that if the average speed of a traffic network is larger than that of another, then we can expect its traffic flow to be equally larger. We used this fitness function when testing our algorithms in the grid traffic network, as shown in figure~\ref{fig:gridoptimum}.
+The first fitness function we designed was the average speed of the vehicles in the network. This is an intuitive metrics, in that if the average speed of a traffic network is larger than that of another, then we can expect its traffic flow to be equally larger. We used this fitness function when testing our algorithms in the grid traffic network.%, as shown in figure~\ref{fig:gridoptimum}.
 
 However, this fitness function did not fit well with the simulator we were using. Indeed, the SUMO simulator had no easy means of recovering the average speed of a vehicle at a given time. In the above experiment we had resorted to placing detectors at specific places along the network; these detectors could measure the velocity of vehicles passing next to them (think of them as speed radars). Whereas this approach worked well in a simple traffic network, placing a number of detectors along multiple roads in a real-world, intricate network was a tedious task. Furthermore, our fitness function was not detector-location agnostic, which means that the placement of the detectors directly impacted the fitness values that we measured, and in turn could greatly impact the results of our algorithms. We decided to move on to a simpler fitness function.
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.5\textwidth]{images/simulator/gridoptimum.png}
-\caption{Basic Simulation}
-\label{fig:gridoptimum}
-\end{figure}
+%\begin{figure}[h]
+%\centering
+%\includegraphics[width=0.5\textwidth]{images/simulator/gridoptimum.png}
+%\caption{Basic Simulation}
+%\label{fig:gridoptimum}
+%\end{figure}
 
 \subsection{Throughput}
 When modelizing the traffic flow in the simulator, we created many different routes that the vehicles would use. When the simulator placed a new vehicle in the network, it chose an a path for the vehicle from within a list of predermined paths that we had decided upon. It made sense to evaluate how many vehicles were making it to their destination in the fixed, allocated time that our simulation was running in, and we chose this as a metric for our fitness function. Intuitively, it is related to the throughput of the traffic network.
@@ -182,11 +182,11 @@ Figure \ref{fig:diff_f} is the result for using different scale factors. X-axis 
   \includegraphics[width=0.3\textwidth]{images/exp/f=20.png}}  
   \subfigure[F=30]{ \label{fig:subfig:c} %% label for second subfigure 
   \includegraphics[width=0.3\textwidth]{images/exp/f=30.png}} 
-  \caption{different factor}
+  \caption{Different Factor}
    \label{fig:diff_f} %% label for entire figure 
 \end{figure}
 
-\subsubsection{Issues encountered}
+\subsubsection{Issues Encountered}
 Basically, we can treat SA as a kind of EA. However, it has only one individual in the population. During the process of solving the optimization problem, SA encountered the same problem with SGA. As it doesn't have a large population, therefore, it can get stuck by local optimum. Another reason SA cannot get the global optimum easily is that it also treats the whole time interval as a whole. Therefore, when the traffic flow can be divided into several different traffic flows microscopically, it is not possible for SA to find the global optimum. 
 
 
@@ -225,9 +225,52 @@ By limiting $T_{a,b}$ to a certain domain such as (1,100), we don't even have to
 
 \section{Experiment \& Result}
 \subsection{Result}
-\textcolor{blue}{I will finish this part}
+During these experiments, we fixed the population size of SGA, FTGA and MTGA to 20 and the number of offspring size to 6 which means that during each generation, we have to evaluate 26 individuals. We fixed the number of generations to 40. And we chose 40 random number sequences to evaluate these algorithms. Therefore, with 1 random number sequence, we have to evaluate $40 * 26 = 1040$ individuals. And we run each algorithm 40 times.
+
+In order to measure the performance of all these algorithms, we fixed the traffic flow, number of simulation step, and the total number of cars input into the simulator. Therefore, we know exactly the global optimum of this problem and we try to find out whether each algorithm can achieve it.
+
+
+\subsubsection{Successful Rate}
+Figure \ref{fig:success_rate} shows the successful rate of each algorithm. We define the success of an algorithm as equation \ref{equ:success}
+\begin{equation}
+\begin{split}
+&\text{\emph{IF} best fitness = global optimum} \\
+&\text{\hspace{2em}\emph{RETURN} \emph{True}}\\
+&\emph{ELSE}\\
+&\text{\hspace{2em}\emph{RETURN} \emph{False}}\\
+\label{equ:success}
+\end{split}
+\end{equation}
+According to the experiment setup stated before, we counted the number of successes for each algorithm and plotted them in Figure \ref{fig:success_rate}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\textwidth]{images/exp/successful_rate.png}
+\label{fig:success_rate}
+\caption{Successful Rate}
+\end{figure}
+
+\subsubsection{Average Fitness}
+During these experiments, we also recorded the average fitness of each algorithm. We analyzed all the data we recorded. Figure \ref{fig:avg_fitness} shows a representative run of each algorithm. From this figure, we can see that the average of FTGA is the best among the four algorithms for most of the time. SGA starts at a low fitness and increases quickly. The average fitness of SA tends to fluctuate. In this case, MTGA remains a relatively high average fitness. We can see that, although MTGA is more flexible than FTGA, it tends to have a lower average. The reason we conclude is that since MTGA has a more flexible chromosome, crossover and mutation are more likely to destruct its good individuals. And the chromosome of FTGA has fewer genes, therefore it is less likely to be affected by these effects.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{images/exp/avg_fitness.png}
+\label{fig:avg_fitness}
+\caption{Average Fitness}
+\end{figure}
+
+\subsubsection{Best Fitness}
+Besides average fitness, we measured the best fitness during the process. Figure \ref{fig:best_fitness} shows the result of this experiment. We can find out that even the average fitness of MTGA may be lower than FTGA, it is more likely to get the global optimum since it is a more precise representation of the problem. SGA tends to behave badly in the beginning. As time goes by, the best fitness it can achieve increase dramatically. SA can achieve its best fitness at any time during its process and it is hard to predict. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{images/exp/best_all.png}
+\label{fig:best_fitness}
+\caption{Best Fitness}
+\end{figure}
+
 \subsection{Conclusion}
-\subsubsection{The limitation of traditional optimization}
 Having investigated a lot work done by others, we found out that almost all of them are based on traditional methods which treat the time interval as a whole. It is a trivial way to solve the problem since EA can deal with this situation perfectly with the unnecessary constraint that the time interval cannot be subdivided. Actually, when it comes to real-world, unpredictable accident happens. Therefore, these factors can affect the traffic flow from time to time. We human beings may not find the subtle difference easily. However, properly designed algorithms are able to find them out.
 
 SGA and SA represent two kinds of traditional algorithms that treat the time interval we want to optimize as a whole. They showed some ability to improve the traffic flow. However, they reach their bottlenecks easily. In some scenarios, they can never get the global optimum. 
@@ -239,7 +282,11 @@ According to the result we get from multiple experiments, we can see that, SGA a
 
 \subsubsection*{Acknowledgments}
 
-We would like to thank Jason Lohn and Irina Brinster for their comprehensive advice given throughout the course of this project. Thanks also go out the the developers of the SUMO simulator.
+We take this opportunity to express our profound gratitude and deep regards to our teacher Professor Jason D Lohn, Associate Research Professor in the Dept. of Electrical and Computer Engineering in Carnegie Mellon University, for his exemplary guidance, monitoring and constant encouragement throughout this report. In developing the ideas used in optimizing traffic lights timing with evolutionary algorithm, we have received helpful inspiration from him. The blessing, help and guidance given by him time to time shall carry us a long way in the journey of our graduate study.
+
+We also thank Irina Brinster, full-time PhD in Carnegie Mellon University, for her technical support and valuable information, which helped us in completing this project  through various stages.
+
+Thanks also go out the the developers of the SUMO simulator.
 
 \subsubsection*{References}
 
