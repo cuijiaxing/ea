@@ -83,11 +83,11 @@ In order to test our algorithm, we modeled the traffic network around the Caltra
 \begin{figure}[h]
  \centering
   \subfigure[Java Simulator]{ \label{fig:simulator_java}
-   \includegraphics[width=0.45\textwidth]{images/simulator/SimpleJavaSimulator.png}}
+   \includegraphics[width=0.3\textwidth]{images/simulator/SimpleJavaSimulator.png}}
   \subfigure[Matsim]{ \label{fig:simulator_matsim} %% label for second subfigure 
-  \includegraphics[width=0.45\textwidth]{images/simulator/matsim_zurich.png}}
+  \includegraphics[width=0.3\textwidth]{images/simulator/matsim_zurich.png}}
   \subfigure[SUMO]{ \label{fig:sumo} %% label for second subfigure 
-  \includegraphics[width=0.75\textwidth]{images/simulator/caltrain.png}}
+  \includegraphics[width=0.3\textwidth]{images/simulator/caltrain.png}}
   \caption{Simulators}
    \label{fig:simulator} %% label for entire figure 
 \end{figure}
@@ -224,7 +224,7 @@ By limiting $T_{a,b}$ to a certain domain such as (1,100), we don't even have to
 
 
 \section{Experiment \& Result}
-\subsection{Result}
+\subsection{Experiment Setup}
 During these experiments, we fixed the population size of SGA, FTGA and MTGA to 20 and the number of offspring size to 6 which means that during each generation, we have to evaluate 26 individuals. We fixed the number of generations to 40. And we chose 40 random number sequences to evaluate these algorithms. Therefore, with 1 random number sequence, we have to evaluate $40 * 26 = 1040$ individuals. And we run each algorithm 40 times.
 
 In order to measure the performance of all these algorithms, we fixed the traffic flow, number of simulation step, and the total number of cars input into the simulator. Therefore, we know exactly the global optimum of this problem and we try to find out whether each algorithm can achieve it.
