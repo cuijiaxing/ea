@@ -270,6 +270,7 @@ Besides average fitness, we measured the best fitness during the process. Figure
 \caption{Best Fitness}
 \end{figure}
 
+\section{Conclusion \& Future Work}
 \subsection{Conclusion}
 Having investigated a lot work done by others, we found out that almost all of them are based on traditional methods which treat the time interval as a whole. It is a trivial way to solve the problem since EA can deal with this situation perfectly with the unnecessary constraint that the time interval cannot be subdivided. Actually, when it comes to real-world, unpredictable accident happens. Therefore, these factors can affect the traffic flow from time to time. We human beings may not find the subtle difference easily. However, properly designed algorithms are able to find them out.
 
@@ -295,14 +296,12 @@ FTGA and MTGA are specially designed for subdividing the whole time interval int
 
 According to the result from table \ref{tab:pa}, we can see that, SGA and SA can optimize the traffic to a certain extent. Although SGA and SA and achieve the global optimum at times, they are not guaranteed to find ti. As FTGA and MTGA have the ability to subdivide the whole time interval into smaller ones, they can further improve the traffic timing. Therefore, they are more likely to find the global optimum. Also, we have stated that FTGA is a simplified version of MTGA. However, it behaves almost as well as MTGA. And it is much easier to implement.
 
+\subsection{Future Work}
+In this paper, we have presented that FTGA and MTGA work better than SGA and SA to optimize the traffic network around Caltrain Station. In the future, we will further test these two algorithm on other traffic networks and traffic flows to see how these algorithms perform. And due to the computational cost, we have only encoded the timing of 1 traffic light in FTGA and MTGA. We will try to encode more traffic lights into the chromosome to test their ability to find the global optimum.
 
 \subsubsection*{Acknowledgments}
 
-We take this opportunity to express our profound gratitude and deep regards to our teacher Professor Jason D Lohn, Associate Research Professor in the Dept. of Electrical and Computer Engineering in Carnegie Mellon University, for his exemplary guidance, monitoring and constant encouragement throughout this report. In developing the ideas used in optimizing traffic lights timing with evolutionary algorithm, we have received helpful inspiration from him. The blessing, help and guidance given by him time to time shall carry us a long way in the journey of our graduate study.
-
-We also thank Irina Brinster, full-time PhD in Carnegie Mellon University, for her technical support and valuable information, which helped us in completing this project  through various stages.
-
-Thanks also go out the the developers of the SUMO simulator.
+We take this opportunity to express our profound gratitude and deep regards to our teacher Professor Jason D Lohn, Associate Research Professor in the Dept. of Electrical and Computer Engineering in Carnegie Mellon University, for his exemplary guidance, monitoring and constant encouragement throughout this report. We also thank Irina Brinster, full-time PhD in Carnegie Mellon University, for her technical support and valuable information, which helped us in completing this project  through various stages.Thanks also go out the the developers of the SUMO simulator.
 
 \subsubsection*{References}
 
